@@ -1,0 +1,6 @@
+Payroll app fitur
+- upload dat file
+- edit absensi
+- tambah/edit/hapus hari libur
+- buat rekap kehadiran perbulan
+- kalkulasi denda per bulan
