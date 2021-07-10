@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <body>
+        <div th:fragment="sidebar">
+            <div id="sidebar" class="sidebar">
+                <!-- begin sidebar scrollbar -->
+                <div data-scrollbar="true" data-height="100%">
+                    <!-- begin sidebar user -->
+
+                    <ul class="nav">
+                        <li class="nav-header">Navigation</li>
+                        <li th:classappend="${activeTab == 'HOME' ? 'active' : ''}">
+                            <a th:href="@{/}">
+                                <i class="fa fa-home"></i>
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li class="has-sub" th:classappend="${activeTab == 'MASTER' ? 'active' : ''}">
+                            <a href="javascript:;">
+                                <i class="fa fa-cogs"></i>
+                                <b class="caret"></b>
+                                <span>Master</span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li th:classappend="${level1 == 'ADMIN' ? 'active' : ''}">
+                                    <a th:href="@{/master/admin}"><i class="fa fa-user-secret"></i> Admin</a>
+                                </li>
+                            </ul>
+                            <ul class="sub-menu">
+                                <li th:classappend="${level1 == 'KARYAWAN' ? 'active' : ''}">
+                                    <a th:href="@{/master/karyawan}"><i class="fa fa-users"></i> Karyawan</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li th:classappend="${activeTab == 'LIBUR' ? 'active' : ''}">
+                            <a th:href="@{/hari_libur}">
+                                <i class="fa fa-home"></i>
+                                <span>Hari Libur</span>
+                            </a>
+                        </li>
+                        <li th:classappend="${activeTab == 'PRESENSI' ? 'active' : ''}">
+                            <a th:href="@{/presensi}">
+                                <i class="fa fa-check-square"></i>
+                                <span>Presensi Karyawan</span>
+                            </a>
+                        </li>
+                        <li th:classappend="${activeTab == 'SLIP_GAJI' ? 'active' : ''}">
+                            <a th:href="@{/slip_gaji}">
+                                <i class="fa fa-check-square"></i>
+                                <span>Buat Slip Gaji</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- end sidebar nav -->
+                </div>
+                <!-- end sidebar scrollbar -->
+            </div>
+            <div class="sidebar-bg"></div>
+        </div>
+    </body>
+</html>

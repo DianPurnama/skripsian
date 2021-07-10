@@ -11,10 +11,10 @@ import java.time.LocalTime;
 @Data @Entity
 @Table( name = "presensi",
         indexes = {
-                @Index( name="idx_absen_karyawan", columnList="karyawan"),
+                @Index( name="idx_absen_karyawan", columnList="id_karyawan"),
                 @Index( name="idx_absen_tanggal", columnList="tanggal"),
             },
-        uniqueConstraints = @UniqueConstraint(columnNames = {"karyawan", "tanggal"})
+        uniqueConstraints = @UniqueConstraint(columnNames = {"id_karyawan", "tanggal"})
         )
 public class Presensi extends BaseEntity {
 

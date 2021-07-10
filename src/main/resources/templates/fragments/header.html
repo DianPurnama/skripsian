@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+       xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <div th:fragment="header">
+            <div id="header" class="header navbar-default">
+                <!-- begin navbar-header -->
+                <div class="navbar-header">
+                    <a th:href="@{/}" class="navbar-brand">
+                        <img th:src="@{/assets/img/payroll_logo.jpg}"/>
+
+                    </a>
+                    <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <!-- end navbar-header -->
+
+                <!-- begin header-nav -->
+                <ul class="navbar-nav navbar-right">
+                    <li class="dropdown navbar-user">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                            <!--<img th:if="${loggedUser.photo}" th:src="@{/image/profile/} + ${loggedUser.photo}" />-->
+                            <!--<img th:unless="${loggedUser.photo}" th:src="@{/assets/img/profile.png}" />-->
+                            <img th:src="@{/assets/img/profile.png}" />
+                            <span class="d-none d-md-inline" th:text="${loggedUser.username}">Pandoyo</span> <b class="caret"></b>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a th:href="@{/profile}" class="dropdown-item">Profile</a>
+                            <a th:href="@{/change_password}" class="dropdown-item">Change Password</a>
+                            <div class="dropdown-divider"></div>
+                            <form th:action="@{/logout}" method="post">
+                                <button type="submit" class="dropdown-item" id="btnLogout">Log Out</button>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+                <!-- end header navigation right -->
+            </div>
+        </div>
+    </body>
+</html>

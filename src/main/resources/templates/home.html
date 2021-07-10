@@ -1,0 +1,29 @@
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}" th:with="activeTab='HOME'">
+<head>
+    <title>Payroll App | Dashboard</title>
+    <div layout:fragment="customCss">
+    </div>
+</head>
+<body>
+<div layout:fragment="content">
+    <!-- begin breadcrumb -->
+    <ol class="breadcrumb pull-right">
+        <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+    </ol>
+    <!-- end breadcrumb -->
+    <!-- begin page-header -->
+    <h1 class="page-header">Home</h1>
+    <!-- end page-header -->
+
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Hello There, <span th:text="${loggedUser.username}"></span></h4>
+        </div>
+    </div>
+</div>
+<div layout:fragment="customJavascript"></div>
+</body>
+</html>

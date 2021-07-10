@@ -1,0 +1,54 @@
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8" />
+        <title>Payroll App</title>
+        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+
+        <link rel="icon" th:href="@{/assets/img/logo.png}">
+        <!-- ================== BEGIN BASE CSS STYLE ================== -->
+        <link th:href="@{/assets/css/google-open-sans.min.css}" rel="stylesheet" />
+        <link th:href="@{/assets/plugins/jquery-ui/jquery-ui.min.css}" rel="stylesheet" />
+        <link th:href="@{/assets/plugins/bootstrap/bootstrap.min.css}" rel="stylesheet" />
+        <link th:href="@{/assets/plugins/font-awesome/all.css}" rel="stylesheet" />
+        <link th:href="@{/assets/plugins/animate/animate.min.css}" rel="stylesheet" />
+        <link th:href="@{/assets/css/style.min.css}" rel="stylesheet" />
+        <link th:href="@{/assets/css/style-responsive.min.css}" rel="stylesheet" />
+        <link th:href="@{/assets/css/theme/default.css}" rel="stylesheet" id="theme" />
+        <link th:href="@{/assets/plugins/bootstrap-select/bootstrap-select.css}" rel="stylesheet" />
+        <link th:href="@{/assets/plugins/bootstrap-daterangepicker/daterangepicker.css}" rel="stylesheet" />
+
+        <link th:href="@{/assets/custom/main.css}" rel="stylesheet" />
+        <!-- ================== END BASE CSS STYLE ================== -->
+
+        <!-- ================== BEGIN BASE JS ================== -->
+        <script th:href="@{/assets/plugins/pace/pace.min.js}"></script>
+        <!-- ================== END BASE JS ================== -->
+        <style>
+            div.bs-searchbox input{
+                color: #000;
+            }
+            select.custom-select.custom-select-sm.form-control{
+                width: 61px;
+            }
+            body div.dataTables_wrapper div.dataTables_paginate ul.pagination {
+                display: flex;
+            }
+            .select2-selection__clear{
+                width: 20px!important;
+                text-align: center!important;
+            }
+            .input-group .checkbox {
+                margin-bottom: 0 !important;
+                padding-left: 0;
+            }
+            .readonly{
+                opacity: 1!important;
+                background-color: white!important;
+                cursor: pointer!important;
+            }
+        </style>
+    </head>
+</html>
