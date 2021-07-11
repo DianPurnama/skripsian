@@ -25,9 +25,19 @@ public class Karyawan extends BaseEntity {
     @Column(unique = true)
     @NotEmpty private String fingerPrintId;
 
+    private String address;
+
     @NotNull private BigDecimal gajiPokok;
 
     // uang tunjangan
     @NotNull private BigDecimal uangMakan;
     @NotNull private BigDecimal uangTransport;
+
+    public BigDecimal getTotalGaji(){
+        BigDecimal gp = this.gajiPokok != null ? this.gajiPokok : BigDecimal.ZERO;
+        BigDecimal um = this.uangMakan != null ? this.uangMakan : BigDecimal.ZERO;
+        BigDecimal ut = this.uangTransport != null ? this.uangTransport : BigDecimal.ZERO;
+
+        return gp.add(um).add(ut);
+    }
 }

@@ -20,6 +20,7 @@ create table karyawan (
         fullname varchar(255),
         gaji_pokok decimal(19,2) not null,
         phone varchar(255),
+        address varchar(255),
         uang_makan decimal(19,2) not null,
         uang_transport decimal(19,2) not null,
         primary key (id)
