@@ -1,0 +1,77 @@
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout}" th:with="activeTab='MASTER',level1='ADMIN'">
+<body>
+<div layout:fragment="content">
+    <!-- begin breadcrumb -->
+    <ol class="breadcrumb pull-right">
+        <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+        <li class="breadcrumb-item"><a href="javascript:;">Master</a></li>
+        <li class="breadcrumb-item active"><a href="javascript:;">Admin</a></li>
+    </ol>
+    <!-- end breadcrumb -->
+    <!-- begin page-header -->
+    <h1 class="page-header">Admin Form</h1>
+    <!-- end page-header -->
+    <hr class="bg-grey-lighter" />
+    <form th:action="@{/master/admin/form}" method="POST">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="panel panel-inverse" data-sortable-id="table-basic-1">
+<!--                    <input type="hidden" th:field="*{id}">-->
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label class=" control-label form-label">Nama Lengkap</label>
+                                <input type="text" class="form-control" required="required" />
+<!--                                <div class="form-text text-danger" th:if="${#fields.hasErrors('fullname')}" th:errors="*{fullname}"></div>-->
+                            </div>
+                            <div class="form-group">
+                                <label class=" control-label form-label">Username</label>
+                                <input type="text" class="form-control" required="required"/>
+<!--                                <div class="form-text text-danger" th:if="${#fields.hasErrors('fingerPrintId')}" th:errors="*{fingerPrintId}"></div>-->
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label form-label">Role</label>
+                                <select name="" id="" class="form-control">
+                                    <option value="ADMIN">Admin</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class=" control-label form-label" for="active">Active</label>
+<!--                                <input type="checkbox" id="active" name="active" style="cursor: pointer;" th:checked="${userManagement.user != null ? userManagement.user.active : false}"/>-->
+                                <input type="checkbox" id="active" name="active" style="cursor: pointer;" />
+                            </div>
+                            <div class="form-group">
+                                <label class=" control-label form-label">Password</label>
+                                <input class="form-control" name="password" type="password" />
+                                <span class="help-block" id="pwValidateUpperCase" style="display: none"><span class="text-danger">Must have Capital (uppercase) letter</span></span>
+                                <span class="help-block" id="pwValidateLowerCase" style="display: none"><span class="text-danger">Must have lowercase letter</span></span>
+                                <span class="help-block" id="pwValidateNumber" style="display: none"><span class="text-danger">Must have number</span></span>
+                                <span class="help-block" id="pwValidateLength" style="display: none"><span class="text-danger">Minimum 8 character</span></span>
+<!--                                <div class="form-text text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>-->
+                            </div>
+                            <div class="form-group">
+                                <label class=" control-label form-label">Confirm Password</label>
+                                <input class="form-control" type="password" name="confirmPassword" id="confirmPassword"/>
+                                <span class="help-block" id="errorConfirmPassword" style="display: none"><span class="text-danger">Password doesn't match !</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 text-right">
+                <button type="submit" id="btnSubmit" class="btn btn-primary">Simpan</button>
+                <a th:href="@{/master/admin/list}" class="btn btn-light">
+                    <span aria-hidden="true"></span>Batal
+                </a>
+            </div>
+        </div>
+    </form>
+</div>
+<div layout:fragment="customJavascript">
+    <script type="text/javascript" th:src="@{/assets/custom/password-validator.js}"></script>
+</div>
+</body>
+</html>
