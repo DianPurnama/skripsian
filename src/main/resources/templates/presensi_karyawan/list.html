@@ -1,0 +1,126 @@
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}" th:with="activeTab='PRESENSI'">
+<head>
+    <div layout:fragment="customCss">
+        <link th:href="@{/assets/plugins/fullcalendar/fullcalendar.print.css}" rel="stylesheet" media='print'/>
+        <link th:href="@{/assets/plugins/fullcalendar/fullcalendar.min.css}" rel="stylesheet" />
+        <link th:href="@{/assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css}" rel="stylesheet" />
+    </div>
+</head>
+<body>
+<div layout:fragment="content">
+    <ol class="breadcrumb pull-right">
+        <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+        <li class="breadcrumb-item active"><a href="javascript:;">Presensi Karyawan</a></li>
+    </ol>
+    <h1 class="page-header">Presensi Karyawan</h1>
+    <hr class="bg-grey-lighter" />
+    <div class="row">
+        <div class="col-md-12 p-b-10">
+            <div class="modal fade" id="modalEvent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Presensi Karyawan</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form th:action="@{/presensi_karyawan/form}" method="post">
+                            <input type="hidden" name="id" id="presensiId" >
+                            <input type="hidden" name="tanggal" id="presensiTanggal" >
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label>Karyawan</label>
+                                    <select name="karyawan" id="presensiKaryawan" class="form-control">
+                                        <option value="">Semua Karyawan</option>
+                                        <option th:each="k : ${karyawans}" th:value="${k.id}" th:text="${k.fullname}"></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Izin</label>
+                                    <div class="switcher">
+                                        <input type="checkbox" name="izin" id="izin" checked="" value="true">
+                                        <label for="izin"></label>
+                                    </div>
+                                </div>
+                                <table class="table">
+                                    <tr>
+                                        <th>Tanggal</th>
+                                        <th>Waktu Absen</th>
+                                    </tr>
+                                    <tr>
+                                        <td><span type="text" id="dateRange"></span></td>
+                                        <td>
+                                            <div class="input-group bootstrap-timepicker">
+                                                <input id="timepicker" name="waktuAbsen" type="text" class="form-control" />
+                                                <span class="input-group-addon"><i class="fa fa-clock"></i></span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="col-md-12 text-right">
+                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="vertical-box">
+                <!-- begin event-list -->
+                <div class="vertical-box-column p-r-30 d-none d-lg-table-cell" style="width: 215px">
+                    <div id="external-events" class="fc-event-list">
+                        <h5 class="m-t-0 m-b-15">Filter</h5>
+                        <div class="form-group">
+                            <label>Pilih Karyawan</label>
+                            <select id="filterKaryawan" class="form-control">
+                                <option value="">Semua Karyawan</option>
+                                <option th:each="k : ${karyawans}" th:value="${k.id}" th:text="${k.fullname}"></option>
+                            </select>
+                        </div>
+                        <hr class="bg-grey-lighter" />
+                        <h5 class="m-t-0 m-b-15">Upload Presensi</h5>
+                        <div class="form-group">
+                            <label>Import .dat file</label>
+                            <input type="file" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <!-- end event-list -->
+                <!-- begin calendar -->
+                <div id="calendar" class="vertical-box-column calendar"></div>
+                <!-- end calendar -->
+            </div>
+        </div>
+    </div>
+</div>
+<div layout:fragment="customJavascript">
+    <script type="text/javascript" th:src="@{/assets/plugins/fullcalendar/lib/moment.min.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/plugins/fullcalendar/fullcalendar.min.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/custom/presensi.js}"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#timepicker").timepicker({
+                showMeridian:false,
+                showSeconds:true
+            });
+            Presensi.init();
+
+            // add 0 on the first digit if the hour is single digit
+            $('#timepicker').timepicker().on('changeTime.timepicker', function (e) {
+                let timePicked = $(this).val();
+                (timePicked.length < 8) ? $(this).val("0" + timePicked) : '';
+            });
+        });
+    </script>
+</div>
+</body>
+</html>

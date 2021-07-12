@@ -3,7 +3,6 @@ package com.artivisi.payroll.service;
 import com.artivisi.payroll.dao.KaryawanDao;
 import com.artivisi.payroll.entity.Karyawan;
 import lombok.extern.slf4j.Slf4j;
-import org.codehaus.groovy.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -25,6 +25,10 @@ public class KaryawanService {
         }else{
             return karyawanDao.findAll(pageable);
         }
+    }
+
+    public List<Karyawan> getKaryawan(){
+        return (List<Karyawan>) karyawanDao.findAll();
     }
 
     public Optional<Karyawan> getKaryawan(String id){

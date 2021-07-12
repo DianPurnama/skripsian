@@ -5,8 +5,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 
 @Data @Entity
 @Table( name = "presensi",
@@ -30,4 +32,34 @@ public class Presensi extends BaseEntity {
     @NotNull
     @DateTimeFormat(pattern = "HH:mm:ss")
     private LocalTime waktuAbsen;
+
+    @NotNull
+    private boolean izin = false;
+
+    @Transient private boolean telat;
+    @Transient private BigDecimal denda;
+
+    public boolean isTelat(){
+        LocalTime jamMasuk = LocalTime.of(8,0,0);
+        return jamMasuk.isBefore(this.waktuAbsen);
+    }
+
+    public BigDecimal getDenda(){
+        BigDecimal result = BigDecimal.ZERO;
+        LocalTime jamMasuk = LocalTime.of(8,0,0);
+        if(jamMasuk.isBefore(this.waktuAbsen) && !isIzin()){
+            BigDecimal dendaPerMenit = new BigDecimal("500");
+            // telat, hitung menit
+            long menitLewat = jamMasuk.until(this.waktuAbsen, ChronoUnit.MINUTES);
+
+            if(menitLewat >= 180){
+                //jika telat sampai jam 11 atau lebih
+                //jika telat 3 jam atau lebih
+                result = dendaPerMenit.multiply(new BigDecimal(180));
+            }else{
+                result = dendaPerMenit.multiply(new BigDecimal(menitLewat));
+            }
+        }
+        return result;
+    }
 }

@@ -31,6 +31,7 @@ create table presensi (
         tanggal date not null,
         waktu_absen time not null,
         id_karyawan varchar(255) not null,
+        izin bit,
         primary key (id)
 ) engine=InnoDB;
 
