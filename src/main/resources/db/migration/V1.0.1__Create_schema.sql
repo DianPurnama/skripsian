@@ -7,8 +7,8 @@ create table cuti_karyawan (
 
 create table hari_libur (
         id varchar(255) not null,
-        deskripsi varchar(255),
-        local_date date not null,
+        start_date date not null,
+        end_date date not null,
         nama varchar(255),
         primary key (id)
 ) engine=InnoDB;

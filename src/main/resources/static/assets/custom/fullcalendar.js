@@ -1,22 +1,44 @@
-var handleCalendar = function() {
-    $('#external-events .fc-event').each(function() {
-        $(this).data('event', {
-            title: $.trim($(this).text()), // use the element's text as the event title
-            stick: true, // maintain when user navigates (see docs on the renderEvent method)
-            color: ($(this).attr('data-color')) ? $(this).attr('data-color') : ''
-        });
-        $(this).draggable({
-            zIndex: 999,
-            revert: true,      // will cause the event to go back to its
-            revertDuration: 0  //  original position after the drag
-        });
+function fetchEvents(startDate, endDate) {
+    let apiUrl = baseUrl + "api/hari_libur";
+    let params = {
+        startDate:startDate,
+        endDate:endDate
+    };
+
+    $.get(apiUrl, params, function(data){
+        let events = [];
+
+        for (let i = 0; i < data.length; i++) {
+            let event = {
+                id:data[i].id,
+                title : data[i].nama,
+                start: data[i].startDate,
+                end: data[i].endDatePlusOne,
+                backgroundColor: COLOR_RED_LIGHTER,
+            }
+            events.push(event);
+        }
+        $('#calendar').fullCalendar( 'removeEventSources');
+        $('#calendar').fullCalendar( 'addEventSource', events );
     });
+}
 
-    var date = new Date();
-    var currentYear = date.getFullYear();
-    var currentMonth = date.getMonth() + 1;
-    currentMonth = (currentMonth < 10) ? '0' + currentMonth : currentMonth;
+function showModal(id,title,start,end) {
+    $("#btnHapus").hide();
 
+    let startDate =$.fullCalendar.moment(start).format();
+    let endDate =$.fullCalendar.moment(end).subtract(1,"days").format();
+
+    $("#modalEvent").modal('toggle');
+    $("#hariLiburId").val(id);
+    $("#title").val(title);
+    $("#hariLiburStartDate").val(startDate);
+    $("#hariLiburEndDate").val(endDate);
+
+    $("#dateRange").text(startDate + ' - '+endDate);
+}
+
+var handleCalendar = function() {
     $('#calendar').fullCalendar({
         defaultView: 'month',
         weekends: false,
@@ -25,46 +47,34 @@ var handleCalendar = function() {
             center: '',
             right: 'today prev,next'
         },
-        droppable: false, // this allows things to be dropped onto the calendar
-        drop: function() {
-            $(this).remove();
-        },
+        selectOverlap:false,
         selectable: true,
         selectHelper: true,
         select: function(start, end) {
-            var title = prompt('Event Title:');
-            var eventData;
-            if (title) {
-                eventData = {
-                    title: title,
-                    start: start,
-                    end: end
-                };
-                $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
-            }
+            showModal('','',start,end);
             $('#calendar').fullCalendar('unselect');
         },
         editable: true,
-        eventLimit: true, // allow "more" link when too many events
-        events: [{
-            title: 'All Day Event',
-            start: currentYear + '-'+ currentMonth +'-01',
-            color: COLOR_GREEN
-        }, {
-            title: 'Long Event',
-            start: currentYear + '-'+ currentMonth +'-07',
-            end: currentYear + '-'+ currentMonth +'-10'
-        }, {
-            id: 999,
-            title: 'Repeating Event',
-            start: currentYear + '-'+ currentMonth +'-09T16:00:00',
-            color: COLOR_GREEN
-        },{
-            title: 'Click for Google',
-            url: 'http://google.com/',
-            start: currentYear + '-'+ currentMonth +'-28',
-            color: COLOR_RED
-        }]
+        eventDrop: function(event, delta, revertFunc) {
+            showModal(event.id, event.title,event.start, event.end);
+            $('#calendar').fullCalendar('unselect');
+            revertFunc();
+        },
+        eventResize: function(event, delta, revertFunc) {
+            showModal(event.id, event.title,event.start, event.end);
+            $('#calendar').fullCalendar('unselect');
+            revertFunc();
+        },
+        eventClick: function(event, jsEvent, view) {
+            showModal(event.id, event.title,event.start, event.end);
+            $("#btnHapus").prop("href",baseUrl+"hari_libur/delete?id="+event.id);
+            $("#btnHapus").show();
+        },
+        viewRender: function(view, element) {
+            let startDate =$.fullCalendar.moment(view.start).format();
+            let endDate =$.fullCalendar.moment(view.end).subtract(1,"days").format();
+           fetchEvents(startDate,endDate);
+        }
     });
 };
 
@@ -74,6 +84,7 @@ var Calendar = function () {
         //main function
         init: function () {
             handleCalendar();
+            fetchEvents();
         }
     };
 }();

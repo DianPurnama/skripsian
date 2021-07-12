@@ -18,6 +18,48 @@
     <hr class="bg-grey-lighter" />
     <div class="row">
         <div class="col-md-12 p-b-10">
+            <div class="modal fade" id="modalEvent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Hari Libur</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form th:action="@{/hari_libur/form}" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="id" id="hariLiburId" >
+                            <input type="hidden" name="startDate" id="hariLiburStartDate" >
+                            <input type="hidden" name="endDate" id="hariLiburEndDate" >
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label>Nama hari libur</label>
+                                    <input type="text" name="nama" id="title" class="form-control" required>
+                                </div>
+                                <table class="table">
+                                    <tr>
+                                        <th>Tanggal</th>
+                                    </tr>
+                                    <tr>
+                                        <td><span type="text" id="dateRange"></span></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="col-md-6">
+                                    <a  id="btnHapus" style="display: none;" type="submit"
+                                        class="btn btn-danger modal-confirmation"
+                                        data-message="Apakah anda yakin ingin menghapus ?">Hapus</a>
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
             <div class="vertical-box">
                 <!-- begin event-list -->
                 <div class="vertical-box-column p-r-30 d-none d-lg-table-cell" style="width: 215px">
