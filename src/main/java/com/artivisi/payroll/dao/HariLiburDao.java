@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface HariLiburDao extends PagingAndSortingRepository<HariLibur, String> {
 
-    List<HariLibur> findByStartDateGreaterThanAndEndDateLessThan(LocalDate startDate, LocalDate endDate);
+    List<HariLibur> findByStartDateGreaterThanEqualAndEndDateLessThanEqual(LocalDate startDate, LocalDate endDate);
+    Long countByStartDateLessThanEqualAndEndDateGreaterThanEqual(LocalDate startDate, LocalDate endDate);
 }

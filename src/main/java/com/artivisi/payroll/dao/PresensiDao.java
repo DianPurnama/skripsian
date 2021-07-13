@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface PresensiDao extends PagingAndSortingRepository<Presensi, String> {
-    List<Presensi> findByTanggalGreaterThanAndTanggalLessThan(LocalDate startDate, LocalDate endDate);
-    List<Presensi> findByTanggalGreaterThanAndTanggalLessThanAndKaryawanId(LocalDate startDate, LocalDate endDate, String idKaryawan);
-
+    List<Presensi> findByTanggalBetween(LocalDate startDate, LocalDate endDate);
+    List<Presensi> findByTanggalBetweenAndKaryawanId(LocalDate startDate, LocalDate endDate, String idKaryawan);
+    Presensi findByKaryawanIdAndTanggal(String idKaryawan, LocalDate localDate);
 }

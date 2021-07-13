@@ -52,10 +52,9 @@ public class Presensi extends BaseEntity {
             // telat, hitung menit
             long menitLewat = jamMasuk.until(this.waktuAbsen, ChronoUnit.MINUTES);
 
-            if(menitLewat >= 180){
-                //jika telat sampai jam 11 atau lebih
-                //jika telat 3 jam atau lebih
-                result = dendaPerMenit.multiply(new BigDecimal(180));
+            if(menitLewat >= 100){
+                //jika telat lebih dari 100 menit (limit maksimum denda)
+                result = dendaPerMenit.multiply(new BigDecimal(100));
             }else{
                 result = dendaPerMenit.multiply(new BigDecimal(menitLewat));
             }

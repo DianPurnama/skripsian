@@ -8,5 +8,5 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 public interface KaryawanDao extends PagingAndSortingRepository<Karyawan, String> {
 
     Page<Karyawan> findByFullnameContainingIgnoreCase(String fullname, Pageable pageable);
-
+    Karyawan findByFingerPrintId(String fingerPrintId);
 }

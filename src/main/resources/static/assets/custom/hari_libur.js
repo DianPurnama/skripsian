@@ -14,7 +14,7 @@ function fetchEvents(startDate, endDate) {
                 title : data[i].nama,
                 start: data[i].startDate,
                 end: data[i].endDatePlusOne,
-                backgroundColor: COLOR_RED_LIGHTER,
+                backgroundColor: COLOR_RED,
             }
             events.push(event);
         }

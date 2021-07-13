@@ -10,6 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -31,13 +32,19 @@ public class PresensiKaryawanController {
             presensiService.save(presensi);
             redirectAttributes.addFlashAttribute("successMessage","Data is saved");
         }catch (Exception e){
-            redirectAttributes.addFlashAttribute("errorMessage",e.getCause().getMessage());
+            redirectAttributes.addFlashAttribute("errorMessage",e.getMessage());
         }
         return "redirect:/presensi_karyawan";
     }
 
     @PostMapping("/upload")
-    public String processUpload(){
+    public String processUpload(MultipartFile file, RedirectAttributes redirectAttributes){
+        try {
+            presensiService.processUpload(file);
+            redirectAttributes.addFlashAttribute("successMessage","Data is uploaded and saved");
+        }catch (Exception e){
+            redirectAttributes.addFlashAttribute("errorMessage",e.getMessage());
+        }
         return "redirect:/presensi_karyawan";
     }
 }

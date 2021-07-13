@@ -17,14 +17,14 @@ public class HariLiburService {
     @Autowired private HariLiburDao hariLiburDao;
 
     public List<HariLibur> getHariLibur(LocalDate startDate, LocalDate endDate){
-        return hariLiburDao.findByStartDateGreaterThanAndEndDateLessThan(startDate, endDate);
+        return hariLiburDao.findByStartDateGreaterThanEqualAndEndDateLessThanEqual(startDate, endDate);
     }
 
     public List<HariLibur> getHariLibur(String startDate, String endDate){
         DateTimeFormatter formatLocalDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate sd = LocalDate.parse(startDate,formatLocalDate);
         LocalDate ed = LocalDate.parse(endDate,formatLocalDate);
-        return hariLiburDao.findByStartDateGreaterThanAndEndDateLessThan(sd,ed);
+        return hariLiburDao.findByStartDateGreaterThanEqualAndEndDateLessThanEqual(sd,ed);
     }
 
     public void save(HariLibur hariLibur) throws Exception {

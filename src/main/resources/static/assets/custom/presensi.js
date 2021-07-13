@@ -18,7 +18,7 @@ function fetchEvents(startDate, endDate, idKaryawan) {
                 title : data[i].nama,
                 start: data[i].startDate,
                 end: data[i].endDatePlusOne,
-                color: COLOR_RED_LIGHTER
+                color: COLOR_RED
             }
             eventsHariLibur.push(event);
         }
@@ -35,7 +35,7 @@ function fetchEvents(startDate, endDate, idKaryawan) {
     };
     $.get(presensiUrl, presensiParam, function(data){
         for (let i = 0; i < data.length; i++) {
-            let warna = !data[i].izin && data[i].telat ? COLOR_RED_DARKER : COLOR_GREEN_LIGHTER;
+            let warna = !data[i].izin && data[i].telat ? COLOR_ORANGE : COLOR_GREEN_LIGHTER;
             let event = {
                 id:data[i].id,
                 izin:data[i].izin,
@@ -102,6 +102,7 @@ var handleCalendar = function() {
             $('#calendar').fullCalendar('unselect');
         },
         eventClick: function(event, jsEvent, view) {
+            if(!event.overlap) return false;
             showModal(event.id,event.karyawan, event.title,event.start, event.waktuAbsen,event.izin);
         },
         viewRender: function(view, element) {
