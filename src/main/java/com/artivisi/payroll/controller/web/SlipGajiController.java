@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.Month;
 
@@ -38,7 +37,7 @@ public class SlipGajiController {
                                    RedirectAttributes redirectAttributes){
 
         try {
-            slipGajiService.generateSlipGaji(params.getMonth(),params.getYear());
+            slipGajiService.generateSlipGajis(params.getMonth(),params.getYear());
             redirectAttributes.addFlashAttribute("successMessage","Slip Gaji "+ Month.of(params.getMonth()).name() +" "+params.getYear()+" berhasil digenerate");
         }catch (Exception e){
             e.printStackTrace();
@@ -48,5 +47,11 @@ public class SlipGajiController {
         redirectAttributes.addAttribute("month",params.getMonth());
         redirectAttributes.addAttribute("year",params.getYear());
         return "redirect:/slip_gaji";
+    }
+
+    @GetMapping("/pdf")
+    public String exportPdf(@RequestParam String id, ModelMap modelMap){
+        modelMap.addAttribute("slipGaji", slipGajiService.getSlipgaji(id));
+        return "slip_gaji/slip_gaji_pdf";
     }
 }

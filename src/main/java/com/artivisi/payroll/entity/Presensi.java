@@ -37,11 +37,20 @@ public class Presensi extends BaseEntity {
     private boolean izin = false;
 
     @Transient private boolean telat;
+    @Transient private long telatMenit = 0;
     @Transient private BigDecimal denda;
 
     public boolean isTelat(){
         LocalTime jamMasuk = LocalTime.of(8,0,0);
         return jamMasuk.isBefore(this.waktuAbsen);
+    }
+
+    public long getTelatMenit(){
+        if(this.isTelat()){
+            LocalTime jamMasuk = LocalTime.of(8,0,0);
+            return jamMasuk.until(this.waktuAbsen, ChronoUnit.MINUTES);
+        }
+        return 0L;
     }
 
     public BigDecimal getDenda(){

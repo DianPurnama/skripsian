@@ -40,4 +40,8 @@ public class Karyawan extends BaseEntity {
 
         return gp.add(um).add(ut);
     }
+
+    public BigDecimal getGajiSatuHariKerja(){
+        return getTotalGaji().divide(new BigDecimal(20));
+    }
 }

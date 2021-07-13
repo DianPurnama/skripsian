@@ -1,5 +1,6 @@
 package com.artivisi.payroll.entity;
 
+import com.artivisi.payroll.dto.DetailPresensiDto;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -7,6 +8,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.Month;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data @Table @Entity
 public class SlipGaji extends BaseEntity{
@@ -33,6 +37,12 @@ public class SlipGaji extends BaseEntity{
 
     @Transient private BigDecimal totalDenda = BigDecimal.ZERO;
     @Transient private BigDecimal totalGaji = BigDecimal.ZERO;
+
+    @Transient private List<DetailPresensiDto> details = new ArrayList<>();
+
+    public String getPeriode(){
+        return Month.of(bulan).name() + "-"+tahun;
+    }
 
     public BigDecimal getTotalDenda() {
         return this.dendaAbsent.add(this.dendaTelat);
