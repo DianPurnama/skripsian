@@ -14,10 +14,10 @@ function fetchEvents(startDate, endDate, idKaryawan) {
         for (let i = 0; i < data.length; i++) {
             let event = {
                 id:data[i].id,
+                overlap:false,
                 title : data[i].nama,
                 start: data[i].startDate,
                 end: data[i].endDatePlusOne,
-                rendering: 'background',
                 color: COLOR_RED_LIGHTER
             }
             eventsHariLibur.push(event);
@@ -44,6 +44,7 @@ function fetchEvents(startDate, endDate, idKaryawan) {
                 title :  data[i].waktuAbsen+ ' - '+data[i].karyawan.fullname,
                 start: data[i].tanggal,
                 color: warna,
+                overlap:true
             }
             eventsPresensi.push(event);
         }
@@ -85,6 +86,20 @@ var handleCalendar = function() {
             left: 'title',
             center: '',
             right: 'today prev,next'
+        },
+        selectable: true,
+        selectHelper: true,
+        selectOverlap: function(event) {
+            return event.overlap;
+        },
+        selectAllow: function (e) {
+            let start = $.fullCalendar.moment(e.start);
+            let end = $.fullCalendar.moment(e.end).subtract(1,"days");
+            return end.isSame(start);
+        },
+        select: function(start) {
+            showModal('','', '',start, '08:00:00',false);
+            $('#calendar').fullCalendar('unselect');
         },
         eventClick: function(event, jsEvent, view) {
             showModal(event.id,event.karyawan, event.title,event.start, event.waktuAbsen,event.izin);

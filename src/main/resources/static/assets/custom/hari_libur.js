@@ -48,6 +48,7 @@ var handleCalendar = function() {
             right: 'today prev,next'
         },
         selectOverlap:false,
+        eventOverlap:false,
         selectable: true,
         selectHelper: true,
         select: function(start, end) {

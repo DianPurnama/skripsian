@@ -35,7 +35,6 @@
                                 <div class="form-group">
                                     <label>Karyawan</label>
                                     <select name="karyawan" id="presensiKaryawan" class="form-control">
-                                        <option value="">Semua Karyawan</option>
                                         <option th:each="k : ${karyawans}" th:value="${k.id}" th:text="${k.fullname}"></option>
                                     </select>
                                 </div>
