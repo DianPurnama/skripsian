@@ -88,7 +88,6 @@ public class PresensiService {
             Karyawan karyawan = karyawanDao.findByFingerPrintId(dto.getFingerPrintId());
             Long hariLiburCount = hariLiburDao.countByStartDateLessThanEqualAndEndDateGreaterThanEqual(tanggal,tanggal);
 
-            System.out.println("PresensiService.convertToValidPresensi ==== hari libur count on date "+tanggal+ " is "+hariLiburCount);
             if(karyawan != null && hariLiburCount.intValue() == 0){
                 Presensi presensi = presensiDao.findByKaryawanIdAndTanggal(karyawan.getId(),tanggal);
                 //cek apakah sudah ada data presensi, jika sudah ada maka update waktu saja.

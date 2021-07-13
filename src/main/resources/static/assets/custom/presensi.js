@@ -18,7 +18,7 @@ function fetchEvents(startDate, endDate, idKaryawan) {
                 title : data[i].nama,
                 start: data[i].startDate,
                 end: data[i].endDatePlusOne,
-                color: COLOR_RED
+                color: "#ff5b57"
             }
             eventsHariLibur.push(event);
         }
@@ -35,7 +35,7 @@ function fetchEvents(startDate, endDate, idKaryawan) {
     };
     $.get(presensiUrl, presensiParam, function(data){
         for (let i = 0; i < data.length; i++) {
-            let warna = !data[i].izin && data[i].telat ? COLOR_ORANGE : COLOR_GREEN_LIGHTER;
+            let warna = !data[i].izin && data[i].telat ? "#f59c1a" : "#00acac";
             let event = {
                 id:data[i].id,
                 izin:data[i].izin,
