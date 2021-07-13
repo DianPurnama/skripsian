@@ -6,11 +6,6 @@
     <div layout:fragment="customCss">
         <link th:href="@{/assets/plugins/fullcalendar/fullcalendar.print.css}" rel="stylesheet" media='print'/>
         <link th:href="@{/assets/plugins/fullcalendar/fullcalendar.min.css}" rel="stylesheet" />
-        <style>
-            ul{
-                padding-left: 15px !important;
-            }
-        </style>
     </div>
 </head>
 <body>
@@ -70,7 +65,7 @@
                 <div class="vertical-box-column p-r-30 d-none d-lg-table-cell" style="width: 215px">
                     <div id="external-events" class="fc-event-list">
                         <h5 class="m-t-0 m-b-15">Instruksi</h5>
-                        <ul>
+                        <ul class="instruction">
                             <li>
                                 Klik pada tanggal untuk mengisi hari libur
                             </li>

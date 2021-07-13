@@ -35,24 +35,14 @@ create table presensi (
         primary key (id)
 ) engine=InnoDB;
 
-create table rekap_denda_bulanan (
-        id varchar(255) not null,
-        bulan integer not null,
-        created_time datetime(6) not null,
-        tahun integer not null,
-        todal_denda decimal(19,2),
-        id_karyawan varchar(255) not null,
-        primary key (id)
-) engine=InnoDB;
-
 create table slip_gaji (
         id varchar(255) not null,
         bulan integer not null,
         created_time datetime(6) not null,
         tahun integer not null,
-        total_gaji decimal(19,2) not null,
+        denda_telat decimal(19,2) not null,
+        denda_absent decimal(19,2) not null,
         id_karyawan varchar(255) not null,
-        id_rekap_denda_bulanan varchar(255) not null,
         primary key (id)
 ) engine=InnoDB;
 
@@ -90,11 +80,5 @@ alter table cuti_karyawan
 alter table presensi
     add constraint FK1589do495ap48iglfm6grspo7 foreign key (id_karyawan) references karyawan (id);
 
-alter table rekap_denda_bulanan
-    add constraint FK1hkdoppgjul2mgjwouc2queye foreign key (id_karyawan) references karyawan (id);
-
 alter table slip_gaji
     add constraint FKbvmelsthv8kcy038ohcmgm63w foreign key (id_karyawan) references karyawan (id);
-
-alter table slip_gaji
-    add constraint FKdmhq83i0pht8btfur0ff4c5it foreign key (id_rekap_denda_bulanan) references rekap_denda_bulanan (id);

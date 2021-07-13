@@ -1,0 +1,96 @@
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}" th:with="activeTab='SLIP_GAJI'">
+<body>
+    <div layout:fragment="content">
+        <ol class="breadcrumb pull-right">
+            <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+            <li class="breadcrumb-item active"><a href="javascript:;">Slip Gaji</a></li>
+        </ol>
+        <h1 class="page-header">Slip Gaji</h1>
+        <hr class="bg-grey-lighter" />
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-inverse" data-sortable-id="table-basic-1">
+                    <form th:action="@{/slip_gaji}" th:object="${params}">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label>Bulan</label>
+                                    <select id="monthSelect" th:field="*{month}" class="form-control">
+                                        <option value="1" th:disabled="${#dates.month(#dates.createNow()) &lt; 1}">Januari</option>
+                                        <option value="2" th:disabled="${#dates.month(#dates.createNow()) &lt; 2}">Februari</option>
+                                        <option value="3" th:disabled="${#dates.month(#dates.createNow()) &lt; 3}">Maret</option>
+                                        <option value="4" th:disabled="${#dates.month(#dates.createNow()) &lt; 4}" >April</option>
+                                        <option value="5" th:disabled="${#dates.month(#dates.createNow()) &lt; 5}">Mei</option>
+                                        <option value="6" th:disabled="${#dates.month(#dates.createNow()) &lt; 6}">Juni</option>
+                                        <option value="7" th:disabled="${#dates.month(#dates.createNow()) &lt; 7}">Juli</option>
+                                        <option value="8" th:disabled="${#dates.month(#dates.createNow()) &lt; 8}">Agustus</option>
+                                        <option value="9" th:disabled="${#dates.month(#dates.createNow()) &lt; 9}">September</option>
+                                        <option value="10" th:disabled="${#dates.month(#dates.createNow()) &lt; 10}">Oktober</option>
+                                        <option value="11" th:disabled="${#dates.month(#dates.createNow()) &lt; 11}">November</option>
+                                        <option value="12" th:disabled="${#dates.month(#dates.createNow()) &lt; 12}" >December</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Tahun</label>
+                                    <select th:field="*{year}" class="form-control">
+                                        <option th:value="${#dates.year(#dates.createNow())}" th:text="${#dates.year(#dates.createNow())}"></option>
+                                        <option th:value="${#dates.year(#dates.createNow())-1}" th:text="${#dates.year(#dates.createNow())-1}"></option>
+                                        <option th:value="${#dates.year(#dates.createNow())-2}" th:text="${#dates.year(#dates.createNow())-2}" ></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer text-right">
+                            <button style="display: none;" id="btnSubmit" type="submit" class="btn btn-primary"><i class="fa fa-search fa-fw"></i> Search</button>
+                        </div>
+                    </form>
+                    <hr/>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>Full Name</th>
+                                <th>Total Gaji</th>
+                                <th>Denda Telat</th>
+                                <th>Denda Bolos</th>
+                                <th>Total Denda</th>
+                                <th>Gaji diterima</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="data : ${datas}">
+                                <td th:text="${data.karyawan.fullname}"></td>
+                                <td th:text="'Rp. '+${#numbers.formatDecimal(data.karyawan.getTotalGaji(), 0, 'COMMA', 0, 'POINT')}"></td>
+                                <td th:text="'Rp. '+${#numbers.formatDecimal(data.dendaTelat, 0, 'COMMA', 0, 'POINT')}"></td>
+                                <td th:text="'Rp. '+${#numbers.formatDecimal(data.dendaAbsent, 0, 'COMMA', 0, 'POINT')}"></td>
+                                <td th:text="'Rp. '+${#numbers.formatDecimal(data.getTotalDenda(), 0, 'COMMA', 0, 'POINT')}"></td>
+                                <td th:text="'Rp. '+${#numbers.formatDecimal(data.getTotalGaji(), 0, 'COMMA', 0, 'POINT')}">
+                                <td class="text-center">
+                                    <a th:href="@{/slip_gaji/detail(id = ${data.id})}" class="btn btn-label-warning btn-sm" title="Detail"><span class="fa fa-eye"></span></a>
+                                    <a th:href="@{/slip_gaji/pdf(id = ${data.id})}" class="btn btn-label-warning btn-sm" title="Download"><span class="fa fa-file-pdf"></span></a>
+                                </td>
+                            </tr>
+                            <tr th:if="${#lists.isEmpty(datas)}">
+                                <td colspan="69" class="text-center">No data for this month of the year, click
+                                    <a  class="modal-confirmation" data-message="Yakin generate? pastikan data presesnsi sudah benar."
+                                        th:href="@{/slip_gaji/generate(month=${params.month},year=${params.year})}">here</a> to generate</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div layout:fragment="customJavascript">
+        <script>
+            $("#monthSelect").on("change",function () {
+               $("#btnSubmit").click();
+            });
+        </script>
+    </div>
+</body>
+</html>
