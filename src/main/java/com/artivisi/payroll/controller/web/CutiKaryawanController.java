@@ -1,9 +1,11 @@
 package com.artivisi.payroll.controller.web;
 
-import com.artivisi.payroll.entity.HariLibur;
-import com.artivisi.payroll.service.HariLiburService;
+import com.artivisi.payroll.entity.CutiKaryawan;
+import com.artivisi.payroll.service.CutiService;
+import com.artivisi.payroll.service.KaryawanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,33 +13,37 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping("/hari_libur")
-public class HariLiburController {
+@RequestMapping("/cuti_karyawan")
+public class CutiKaryawanController {
 
-    @Autowired private HariLiburService hariLiburService;
+    @Autowired private CutiService CutiKaryawanService;
+    @Autowired private KaryawanService karyawanService;
 
     @GetMapping
-    public String showList(){return "hari_libur/list";}
+    public String showList(ModelMap modelMap){
+        modelMap.addAttribute("karyawans", karyawanService.getKaryawan());
+        return "cuti_karyawan/list";
+    }
 
     @PostMapping("/form")
-    public String processHariLibur(HariLibur hariLibur, RedirectAttributes redirectAttributes){
+    public String processCutiKaryawan(CutiKaryawan CutiKaryawan, RedirectAttributes redirectAttributes){
         try {
-            hariLiburService.save(hariLibur);
+            CutiKaryawanService.save(CutiKaryawan);
             redirectAttributes.addFlashAttribute("successMessage","Data is saved");
         }catch (Exception e){
             redirectAttributes.addFlashAttribute("errorMessage",e.getMessage());
         }
-        return "redirect:/hari_libur";
+        return "redirect:/cuti_karyawan";
     }
 
     @GetMapping("/delete")
-    public String deletehariLibur(@RequestParam String id, RedirectAttributes redirectAttributes){
+    public String deleteCutiKaryawan(@RequestParam String id, RedirectAttributes redirectAttributes){
         try {
-            hariLiburService.delete(id);
+            CutiKaryawanService.delete(id);
             redirectAttributes.addFlashAttribute("successMessage","Data is deleted");
         }catch (Exception e){
             redirectAttributes.addFlashAttribute("errorMessage",e.getMessage());
         }
-        return "redirect:/hari_libur";
+        return "redirect:/cuti_karyawan";
     }
 }

@@ -21,6 +21,9 @@ insert into hari_libur (id, start_date, end_date, nama) values
     ('LIBUR_05','2021-05-31','2021-06-01','Hari Kejepit & Pancasila'),
     ('LIBUR_06','2021-07-19','2021-07-20','Hari Idul Adha');
 
+insert into cuti_karyawan (id, tanggal_cuti, keterangan_cuti, id_karyawan) values
+    ('CUTI_01','2021-06-07','Acara keluarga','KARYAWAN_01');
+
 insert into presensi (id, tanggal, waktu_absen, id_karyawan, izin) values
     ('PRESENSI_01','2021-07-12','07:30:20','KARYAWAN_01',false),
     ('PRESENSI_02','2021-07-13','08:10:11','KARYAWAN_01',false),

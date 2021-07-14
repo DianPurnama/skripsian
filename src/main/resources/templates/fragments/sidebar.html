@@ -33,13 +33,19 @@
                         </li>
                         <li th:classappend="${activeTab == 'HARI_LIBUR' ? 'active' : ''}">
                             <a th:href="@{/hari_libur}">
-                                <i class="fa fa-exclamation-triangle"></i>
+                                <i class="fa fa-calendar-times"></i>
                                 <span>Hari Libur</span>
+                            </a>
+                        </li>
+                        <li th:classappend="${activeTab == 'CUTI' ? 'active' : ''}">
+                            <a th:href="@{/cuti_karyawan}">
+                                <i class="fa fa-exclamation-triangle"></i>
+                                <span>Cuti Karyawan</span>
                             </a>
                         </li>
                         <li th:classappend="${activeTab == 'PRESENSI' ? 'active' : ''}">
                             <a th:href="@{/presensi_karyawan}">
-                                <i class="fa fa-check-square"></i>
+                                <i class="fa fa-calendar-check"></i>
                                 <span>Presensi Karyawan</span>
                             </a>
                         </li>

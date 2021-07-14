@@ -2,6 +2,7 @@ create table cuti_karyawan (
        id varchar(255) not null,
        tanggal_cuti date not null,
        id_karyawan varchar(255),
+       keterangan_cuti varchar(255),
        primary key (id)
 ) engine=InnoDB;
 

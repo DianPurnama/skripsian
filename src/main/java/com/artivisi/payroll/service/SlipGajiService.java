@@ -1,10 +1,8 @@
 package com.artivisi.payroll.service;
 
-import com.artivisi.payroll.dao.HariLiburDao;
-import com.artivisi.payroll.dao.KaryawanDao;
-import com.artivisi.payroll.dao.PresensiDao;
-import com.artivisi.payroll.dao.SlipGajiDao;
+import com.artivisi.payroll.dao.*;
 import com.artivisi.payroll.dto.DetailPresensiDto;
+import com.artivisi.payroll.entity.CutiKaryawan;
 import com.artivisi.payroll.entity.Karyawan;
 import com.artivisi.payroll.entity.Presensi;
 import com.artivisi.payroll.entity.SlipGaji;
@@ -30,6 +28,7 @@ public class SlipGajiService {
     @Autowired private SlipGajiDao slipGajiDao;
     @Autowired private PresensiDao presensiDao;
     @Autowired private HariLiburDao hariLiburDao;
+    @Autowired private CutiKaryawanDao cutiKaryawanDao;
 
     public List<SlipGaji> getSlipGaji(int month, int year){
         List<SlipGaji> result = slipGajiDao.findByBulanAndTahun(month, year);
@@ -51,6 +50,9 @@ public class SlipGajiService {
                 BigDecimal dendaTelat = BigDecimal.ZERO;
                 BigDecimal dendaBolos = BigDecimal.ZERO;
                 for (LocalDate workingDay:workingDays) {
+                    CutiKaryawan cutiKaryawan = cutiKaryawanDao.findByTanggalCutiAndKaryawanId(workingDay, k.getId());
+                    if(cutiKaryawan != null) break;
+
                     Presensi presensi = presensiDao.findByKaryawanIdAndTanggal(k.getId(),workingDay);
                     System.out.println(" ================== tanggal : "+workingDay+" ==================");
                     if(presensi !=null){
@@ -109,7 +111,8 @@ public class SlipGajiService {
 
         for (LocalDate workingDay:workingDays) {
             Presensi presensi = presensiDao.findByKaryawanIdAndTanggal(karyawan.getId(),workingDay);
-            result.add(new DetailPresensiDto(workingDay,presensi,karyawan));
+            CutiKaryawan cutiKaryawan = cutiKaryawanDao.findByTanggalCutiAndKaryawanId(workingDay, karyawan.getId());
+            result.add(new DetailPresensiDto(workingDay,presensi,cutiKaryawan,karyawan));
         }
         return result;
     }

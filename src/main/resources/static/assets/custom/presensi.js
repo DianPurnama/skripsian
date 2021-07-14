@@ -2,6 +2,7 @@ function fetchEvents(startDate, endDate, idKaryawan) {
     $('#calendar').fullCalendar( 'removeEventSources');
     let eventsHariLibur = [];
     let eventsPresensi = [];
+    let eventsCuti = [];
 
     // dapetin hari libur
     let hariLiburUrl = baseUrl + "api/hari_libur";
@@ -14,16 +15,42 @@ function fetchEvents(startDate, endDate, idKaryawan) {
         for (let i = 0; i < data.length; i++) {
             let event = {
                 id:data[i].id,
-                overlap:false,
                 title : data[i].nama,
                 start: data[i].startDate,
                 end: data[i].endDatePlusOne,
-                color: "#ff5b57"
+                color: "#ff5b57",
+                editable:false,
+                overlap:false
             }
             eventsHariLibur.push(event);
         }
 
         $('#calendar').fullCalendar( 'addEventSource', eventsHariLibur );
+    });
+
+    // dapetin karyawan cuti
+    let cutiUrl = baseUrl + "api/cuti_karyawan";
+    let cutiParam = {
+        startDate:startDate,
+        endDate:endDate,
+        idKaryawan:idKaryawan
+    };
+    $.get(cutiUrl, cutiParam, function(data){
+        for (let i = 0; i < data.length; i++) {
+            let event = {
+                id:data[i].id,
+                karyawanId:data[i].karyawan.id,
+                keterangan:data[i].keteranganCuti,
+                title : data[i].karyawan.fullname + ' - '+data[i].keteranganCuti,
+                start: data[i].tanggalCuti,
+                backgroundColor: "#8753de",
+                editable:false,
+                overlap:true
+            }
+            eventsCuti.push(event);
+        }
+
+        $('#calendar').fullCalendar( 'addEventSource', eventsCuti );
     });
 
     // dapetin presensi
@@ -44,6 +71,7 @@ function fetchEvents(startDate, endDate, idKaryawan) {
                 title :  data[i].waktuAbsen+ ' - '+data[i].karyawan.fullname,
                 start: data[i].tanggal,
                 color: warna,
+                editable:true,
                 overlap:true
             }
             eventsPresensi.push(event);
@@ -88,7 +116,6 @@ var handleCalendar = function() {
             right: 'today prev,next'
         },
         selectable: true,
-        selectHelper: true,
         selectOverlap: function(event) {
             return event.overlap;
         },
@@ -102,7 +129,7 @@ var handleCalendar = function() {
             $('#calendar').fullCalendar('unselect');
         },
         eventClick: function(event, jsEvent, view) {
-            if(!event.overlap) return false;
+            if(!event.editable) return false;
             showModal(event.id,event.karyawan, event.title,event.start, event.waktuAbsen,event.izin);
         },
         viewRender: function(view, element) {

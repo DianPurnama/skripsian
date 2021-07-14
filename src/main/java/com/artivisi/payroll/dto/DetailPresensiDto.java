@@ -1,5 +1,6 @@
 package com.artivisi.payroll.dto;
 
+import com.artivisi.payroll.entity.CutiKaryawan;
 import com.artivisi.payroll.entity.Karyawan;
 import com.artivisi.payroll.entity.Presensi;
 import lombok.AllArgsConstructor;
@@ -16,9 +17,13 @@ public class DetailPresensiDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate tanggal;
     private Presensi presensi;
+    private CutiKaryawan cutiKaryawan;
     private Karyawan karyawan;
 
     public String getDescription(){
+        if(cutiKaryawan != null)return "Keterangan cuti : "+cutiKaryawan.getKeteranganCuti();
+
+
         if(this.presensi != null){
             if(this.presensi.isIzin()) return "Izin";
             if(presensi.isTelat()) return "Telat "+this.presensi.getTelatMenit()+" menit";
@@ -29,6 +34,8 @@ public class DetailPresensiDto {
     }
 
     public BigDecimal getDenda(){
+        if(cutiKaryawan != null) return BigDecimal.ZERO;
+
         if(this.presensi != null){
             if(this.presensi.isTelat() && !this.presensi.isIzin()) return this.presensi.getDenda();
         }else{
