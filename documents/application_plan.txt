@@ -6,8 +6,8 @@ Payroll app fitur
 - kalkulasi denda per bulan
 
 ----------- UML yang harus dibuat
-1. need erd diagram of database
-2. need Logical Record Structure of database
-3. class diagram
-4. sequence diagram
-5. deployment diagram
+1. need erd diagram of database ✓
+2. need Logical Record Structure of database ✓
+3. class diagram ✓
+4. sequence diagram ✓
+5. deployment diagram ✓

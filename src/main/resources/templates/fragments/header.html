@@ -28,8 +28,8 @@
                             <span class="d-none d-md-inline" th:text="${loggedUser.username}">Pandoyo</span> <b class="caret"></b>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a th:href="@{/profile}" class="dropdown-item">Profile</a>
-                            <a th:href="@{/change_password}" class="dropdown-item">Change Password</a>
+<!--                            <a th:href="@{/profile}" class="dropdown-item">Profile</a>-->
+<!--                            <a th:href="@{/change_password}" class="dropdown-item">Change Password</a>-->
                             <div class="dropdown-divider"></div>
                             <form th:action="@{/logout}" method="post">
                                 <button type="submit" class="dropdown-item" id="btnLogout">Log Out</button>

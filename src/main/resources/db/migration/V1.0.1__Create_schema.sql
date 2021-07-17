@@ -43,6 +43,8 @@ create table slip_gaji (
         tahun integer not null,
         denda_telat decimal(19,2) not null,
         denda_absent decimal(19,2) not null,
+        total_denda decimal(19,2) not null,
+        total_gaji decimal(19,2) not null,
         id_karyawan varchar(255) not null,
         primary key (id)
 ) engine=InnoDB;

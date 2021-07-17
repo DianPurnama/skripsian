@@ -35,8 +35,8 @@ public class SlipGaji extends BaseEntity{
     @NotNull private BigDecimal dendaTelat = BigDecimal.ZERO;
     @NotNull private BigDecimal dendaAbsent = BigDecimal.ZERO;
 
-    @Transient private BigDecimal totalDenda = BigDecimal.ZERO;
-    @Transient private BigDecimal totalGaji = BigDecimal.ZERO;
+    @NotNull private BigDecimal totalDenda = BigDecimal.ZERO;
+    @NotNull private BigDecimal totalGaji = BigDecimal.ZERO;
 
     @Transient private List<DetailPresensiDto> details = new ArrayList<>();
 
@@ -44,11 +44,11 @@ public class SlipGaji extends BaseEntity{
         return Month.of(bulan).name() + "-"+tahun;
     }
 
-    public BigDecimal getTotalDenda() {
-        return this.dendaAbsent.add(this.dendaTelat);
-    }
-
-    public BigDecimal getTotalGaji() {
-        return this.karyawan.getTotalGaji().subtract(getTotalDenda());
-    }
+//    public BigDecimal getTotalDenda() {
+//        return this.dendaAbsent.add(this.dendaTelat);
+//    }
+//
+//    public BigDecimal getTotalGaji() {
+//        return this.karyawan.getTotalGaji().subtract(getTotalDenda());
+//    }
 }

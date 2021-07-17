@@ -16,20 +16,25 @@
                                 <span>Home</span>
                             </a>
                         </li>
-                        <li class="has-sub" th:classappend="${activeTab == 'MASTER' ? 'active' : ''}">
-                            <a href="javascript:;">
-                                <i class="fa fa-cogs"></i>
-                                <b class="caret"></b>
-                                <span>Master</span>
+<!--                        <li class="has-sub" th:classappend="${activeTab == 'MASTER' ? 'active' : ''}">-->
+<!--                            <a href="javascript:;">-->
+<!--                                <i class="fa fa-cogs"></i>-->
+<!--                                <b class="caret"></b>-->
+<!--                                <span>Master</span>-->
+<!--                            </a>-->
+<!--                            <ul class="sub-menu">-->
+<!--                                <li th:classappend="${level1 == 'ADMIN' ? 'active' : ''}">-->
+<!--                                    <a th:href="@{/master/admin}"><i class="fa fa-user-secret"></i> Admin</a>-->
+<!--                                </li>-->
+<!--                                <li th:classappend="${level1 == 'KARYAWAN' ? 'active' : ''}">-->
+<!--                                    <a th:href="@{/master/karyawan}"><i class="fa fa-users"></i> Karyawan</a>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </li>-->
+                        <li th:classappend="${level1 == 'KARYAWAN' ? 'active' : ''}">
+                            <a th:href="@{/master/karyawan}">
+                                <i class="fa fa-users"></i> Karyawan
                             </a>
-                            <ul class="sub-menu">
-                                <li th:classappend="${level1 == 'ADMIN' ? 'active' : ''}">
-                                    <a th:href="@{/master/admin}"><i class="fa fa-user-secret"></i> Admin</a>
-                                </li>
-                                <li th:classappend="${level1 == 'KARYAWAN' ? 'active' : ''}">
-                                    <a th:href="@{/master/karyawan}"><i class="fa fa-users"></i> Karyawan</a>
-                                </li>
-                            </ul>
                         </li>
                         <li th:classappend="${activeTab == 'HARI_LIBUR' ? 'active' : ''}">
                             <a th:href="@{/hari_libur}">

@@ -81,7 +81,8 @@ public class SlipGajiService {
                 slipGaji.setTahun(year);
                 slipGaji.setDendaTelat(dendaTelat);
                 slipGaji.setDendaAbsent(dendaBolos);
-
+                slipGaji.setTotalDenda(dendaBolos.add(dendaTelat));
+                slipGaji.setTotalGaji(k.getTotalGaji().subtract(slipGaji.getTotalDenda()));
                 slipGajiDao.save(slipGaji);
             }
 
