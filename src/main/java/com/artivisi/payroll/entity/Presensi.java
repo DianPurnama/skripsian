@@ -35,10 +35,15 @@ public class Presensi extends BaseEntity {
 
     @NotNull
     private boolean izin = false;
+    private izinType izinType;
 
     @Transient private boolean telat;
     @Transient private long telatMenit = 0;
     @Transient private BigDecimal denda;
+
+    public enum izinType{
+        PERSONAL,WORK
+    }
 
     public boolean isTelat(){
         LocalTime jamMasuk = LocalTime.of(8,0,0);

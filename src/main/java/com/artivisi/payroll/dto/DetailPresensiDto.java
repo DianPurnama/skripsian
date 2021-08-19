@@ -39,7 +39,7 @@ public class DetailPresensiDto {
         if(this.presensi != null){
             if(this.presensi.isTelat() && !this.presensi.isIzin()) return this.presensi.getDenda();
         }else{
-            return this.karyawan.getGajiSatuHariKerja();
+            return this.karyawan.getGajiKaryawan().getGajiSatuHariKerja();
         }
         return BigDecimal.ZERO;
     }

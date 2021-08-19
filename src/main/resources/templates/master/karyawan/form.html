@@ -52,31 +52,6 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="panel panel-inverse" data-sortable-id="table-basic-1">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <label class=" control-label form-label">Gaji Pokok</label>
-                                <input type="number" class="form-control" th:field="*{gajiPokok}" required="required" />
-                                <div class="form-text text-danger" th:if="${#fields.hasErrors('gajiPokok')}" th:errors="*{gajiPokok}"></div>
-                            </div>
-                            <hr>
-                            <h3 class="text-center">Tunjangan</h3>
-                            <div class="form-group">
-                                <label class=" control-label form-label">Uang Makan</label>
-                                <input type="number" class="form-control" th:field="*{uangMakan}" required="required" />
-                                <div class="form-text text-danger" th:if="${#fields.hasErrors('uangMakan')}" th:errors="*{uangMakan}"></div>
-                            </div>
-                            <div class="form-group">
-                                <label class=" control-label form-label">Uang Transport</label>
-                                <input type="number" class="form-control" th:field="*{uangTransport}" required="required" />
-                                <div class="form-text text-danger" th:if="${#fields.hasErrors('uangTransport')}" th:errors="*{uangTransport}"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="col-md-12 text-right">
                 <button type="submit" id="btnSubmit" class="btn btn-primary">Simpan</button>
                 <a th:href="@{/master/karyawan}" class="btn btn-light">

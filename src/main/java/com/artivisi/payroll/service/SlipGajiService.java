@@ -67,7 +67,7 @@ public class SlipGajiService {
                         }
                     }else{
                         System.out.println(" ================== tidak hadir / bolos ==================");
-                        BigDecimal gajiPerhari = k.getGajiSatuHariKerja();
+                        BigDecimal gajiPerhari = k.getGajiKaryawan().getGajiSatuHariKerja();
                         System.out.println(" ================== denda bolos / gaji perhari = "+gajiPerhari+" ==================");
                         dendaBolos = dendaBolos.add(gajiPerhari);
                     }
@@ -82,7 +82,7 @@ public class SlipGajiService {
                 slipGaji.setDendaTelat(dendaTelat);
                 slipGaji.setDendaAbsent(dendaBolos);
                 slipGaji.setTotalDenda(dendaBolos.add(dendaTelat));
-                slipGaji.setTotalGaji(k.getTotalGaji().subtract(slipGaji.getTotalDenda()));
+                slipGaji.setTotalGaji(k.getGajiKaryawan().getTotalGaji().subtract(slipGaji.getTotalDenda()));
                 slipGajiDao.save(slipGaji);
             }
 

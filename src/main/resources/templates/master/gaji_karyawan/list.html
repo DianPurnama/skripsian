@@ -1,24 +1,24 @@
 <html
         xmlns:th="http://www.thymeleaf.org"
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{layout}" th:with="activeTab='MASTER',level1='KARYAWAN'">
+        layout:decorate="~{layout}" th:with="activeTab='MASTER',level1='GAJI'">
 <body>
 <div layout:fragment="content">
     <ol class="breadcrumb pull-right">
         <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
         <li class="breadcrumb-item"><a href="javascript:;">Master</a></li>
-        <li class="breadcrumb-item active"><a href="javascript:;">Karyawan</a></li>
+        <li class="breadcrumb-item active"><a href="javascript:;">Gaji</a></li>
     </ol>
     <h1 class="page-header">Karyawan</h1>
     <hr class="bg-grey-lighter" />
     <div class="row">
         <div class="col-md-12 p-b-10">
-            <a th:href="@{/master/karyawan/form}" class="btn btn-primary">Tambah Karyawan</a>
+            <a th:href="@{/master/gaji/form}" class="btn btn-primary">Tambah Karyawan</a>
         </div>
         <div class="col-md-12">
             <div class="panel panel-inverse" data-sortable-id="table-basic-1">
                 <div class="panel-body">
-                    <form th:action="@{/master/karyawan}">
+                    <form th:action="@{/master/gaji}">
                         <div class="input-group input-group-sm m-b-20">
                             <input type="text" class="form-control" th:value="${name}" placeholder="Cari ...">
                             <div class="input-group-append">
@@ -30,23 +30,23 @@
                     <div class="table-responsive">
                         <table class="table table-bordered">
                             <tr>
-                                <th>Full Name</th>
-                                <th>Finger Print ID</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>Address</th>
+                                <th>Naka Karyawan</th>
+                                <th>Gaji Pokok</th>
+                                <th>Uang Makan</th>
+                                <th>Uang Transport</th>
+                                <th>Total Gaji</th>
                                 <th class="text-center">Action</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr th:each="data : ${datas}">
-                                <td th:text="${data.fullname}"></td>
-                                <td th:text="${data.fingerPrintId}"></td>
-                                <td th:text="${data.email}"></td>
-                                <td th:text="${data.phone}"></td>
-                                <td th:text="${data.address}"></td>
+                                <td th:text="${data.karyawan.fullname}"></td>
+                                <td th:text="'Rp. '+${#numbers.formatDecimal(data.gajiPokok, 0, 'COMMA', 0, 'POINT')}">
+                                <td th:text="'Rp. '+${#numbers.formatDecimal(data.uangMakan, 0, 'COMMA', 0, 'POINT')}">
+                                <td th:text="'Rp. '+${#numbers.formatDecimal(data.uangTransport, 0, 'COMMA', 0, 'POINT')}">
+                                <td th:text="'Rp. '+${#numbers.formatDecimal(data.getTotalGaji(), 0, 'COMMA', 0, 'POINT')}">
                                 <td class="text-center">
-                                    <a th:href="@{/master/karyawan/form(id = ${data.id})}" class="btn btn-label-warning btn-sm" title="Edit"><span class="fa fa-edit"></span></a>
+                                    <a th:href="@{/master/gaji/form(id = ${data.id})}" class="btn btn-label-warning btn-sm" title="Edit"><span class="fa fa-edit"></span></a>
                                 </td>
                             </tr>
                             <tr th:if="${#lists.isEmpty(datas.content)}">

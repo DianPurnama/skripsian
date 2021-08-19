@@ -1,17 +1,29 @@
 insert into user (id,active,fullname,role,username,password) values
     ('default_admin',true,'Administrator','ADMIN','admin','$2a$08$LS3sz9Ft014MNaIGCEyt4u6VflkslOW/xosyRbinIF9.uaVLpEhB6');
 
-insert into karyawan (id, fullname, email, phone,address, finger_print_id, gaji_pokok, uang_makan, uang_transport) values
-    ('KARYAWAN_01','Iqbal', '11172804@nusamandiri.ac.id','08123123121','Jl. Taman Malaka','201607027',4000000.00,500000.00,500000.00),
-    ('KARYAWAN_02','Aji', 'aji@yopmail.com','08123123122','Jl. Taman Malaka','20160928',4000000.00,500000.00,500000.00),
-    ('KARYAWAN_03','Galang', 'galang@yopmail.com','08123123123','Jl. Taman Malaka','4444',4000000.00,500000.00,500000.00),
-    ('KARYAWAN_04','Agung', 'agung@yopmail.com','08123123124','Jl. Taman Malaka','8996547',4000000.00,500000.00,500000.00),
-    ('KARYAWAN_05','Dian', 'dian@yopmail.com','08123123125','Jl. Taman Malaka','5555',4000000.00,500000.00,500000.00),
-    ('KARYAWAN_06','Ivans', 'ivans@yopmail.com','08123123126','Jl. Taman Malaka','201607032',4000000.00,500000.00,500000.00),
-    ('KARYAWAN_07','Anggi', 'anggi@yopmail.com','08123123127','Jl. Taman Malaka','20120716',4000000.00,500000.00,500000.00),
-    ('KARYAWAN_08','Dadanks', 'dadanks@yomail.com','08123123128','Jl. Taman Malaka','20081204',4000000.00,500000.00,500000.00),
-    ('KARYAWAN_09','Wahyu', 'wahyu@yomail.com','08123123129','Jl. Taman Malaka','20160929',4000000.00,500000.00,500000.00),
-    ('KARYAWAN_10','Indra Monoy', 'indra@yomail.com','08123123130','Jl. Taman Malaka','20130625',4000000.00,500000.00,500000.00);
+insert into karyawan (id, fullname, email, phone,address, finger_print_id) values
+    ('KARYAWAN_01','Iqbal', '11172804@nusamandiri.ac.id','08123123121','Jl. Taman Malaka','201607027'),
+    ('KARYAWAN_02','Aji', 'aji@yopmail.com','08123123122','Jl. Taman Malaka','20160928'),
+    ('KARYAWAN_03','Galang', 'galang@yopmail.com','08123123123','Jl. Taman Malaka','4444'),
+    ('KARYAWAN_04','Agung', 'agung@yopmail.com','08123123124','Jl. Taman Malaka','8996547'),
+    ('KARYAWAN_05','Dian', 'dian@yopmail.com','08123123125','Jl. Taman Malaka','5555'),
+    ('KARYAWAN_06','Ivans', 'ivans@yopmail.com','08123123126','Jl. Taman Malaka','201607032'),
+    ('KARYAWAN_07','Anggi', 'anggi@yopmail.com','08123123127','Jl. Taman Malaka','20120716'),
+    ('KARYAWAN_08','Dadanks', 'dadanks@yomail.com','08123123128','Jl. Taman Malaka','20081204'),
+    ('KARYAWAN_09','Wahyu', 'wahyu@yomail.com','08123123129','Jl. Taman Malaka','20160929'),
+    ('KARYAWAN_10','Indra Monoy', 'indra@yomail.com','08123123130','Jl. Taman Malaka','20130625');
+
+insert into gaji_karyawan (id, id_karyawan, gaji_pokok, uang_makan, uang_transport) values
+    ('GAJI_01','KARYAWAN_01', 4000000.00,500000.00,500000.00),
+    ('GAJI_02','KARYAWAN_02', 4000000.00,500000.00,500000.00),
+    ('GAJI_03','KARYAWAN_03', 4000000.00,500000.00,500000.00),
+    ('GAJI_04','KARYAWAN_04', 4000000.00,500000.00,500000.00),
+    ('GAJI_05','KARYAWAN_05', 4000000.00,500000.00,500000.00),
+    ('GAJI_06','KARYAWAN_06', 4000000.00,500000.00,500000.00),
+    ('GAJI_07','KARYAWAN_07', 4000000.00,500000.00,500000.00),
+    ('GAJI_08','KARYAWAN_08', 4000000.00,500000.00,500000.00),
+    ('GAJI_09','KARYAWAN_09', 4000000.00,500000.00,500000.00),
+    ('GAJI_10','KARYAWAN_10', 4000000.00,500000.00,500000.00);
 
 insert into hari_libur (id, start_date, end_date, nama) values
     ('LIBUR_01','2021-05-01','2021-05-01','Hari Buruh Internasional'),

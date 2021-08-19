@@ -1,0 +1,65 @@
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout}" th:with="activeTab='MASTER',level1='GAJI'">
+<body>
+<div layout:fragment="content">
+    <!-- begin breadcrumb -->
+    <ol class="breadcrumb pull-right">
+        <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+        <li class="breadcrumb-item"><a href="javascript:;">Master</a></li>
+        <li class="breadcrumb-item active"><a href="javascript:;">Gaji</a></li>
+    </ol>
+    <!-- end breadcrumb -->
+    <!-- begin page-header -->
+    <h1 class="page-header">Karyawan Form</h1>
+    <!-- end page-header -->
+
+    <form th:action="@{/master/gaji/form}" th:object="${gaji}" method="POST">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="panel panel-inverse" data-sortable-id="table-basic-1">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label class=" control-label form-label">Karyawan</label>
+                                <select th:field="*{karyawan}" class="form-control" required>
+                                    <option th:each="k : ${karayawans}" th:value="${k.id}" th:text="${k.fullname}"></option>
+                                </select>
+                                <div class="form-text text-danger" th:if="${#fields.hasErrors('gajiPokok')}" th:errors="*{gajiPokok}"></div>
+                            </div>
+                            <hr>
+                            <div class="form-group">
+                                <label class=" control-label form-label">Gaji Pokok</label>
+                                <input type="number" class="form-control" th:field="*{gajiPokok}" required="required" />
+                                <div class="form-text text-danger" th:if="${#fields.hasErrors('gajiPokok')}" th:errors="*{gajiPokok}"></div>
+                            </div>
+                            <hr>
+                            <h3 class="text-center">Tunjangan</h3>
+                            <div class="form-group">
+                                <label class=" control-label form-label">Uang Makan</label>
+                                <input type="number" class="form-control" th:field="*{uangMakan}" required="required" />
+                                <div class="form-text text-danger" th:if="${#fields.hasErrors('uangMakan')}" th:errors="*{uangMakan}"></div>
+                            </div>
+                            <div class="form-group">
+                                <label class=" control-label form-label">Uang Transport</label>
+                                <input type="number" class="form-control" th:field="*{uangTransport}" required="required" />
+                                <div class="form-text text-danger" th:if="${#fields.hasErrors('uangTransport')}" th:errors="*{uangTransport}"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 text-right">
+                <button type="submit" id="btnSubmit" class="btn btn-primary">Simpan</button>
+                <a th:href="@{/master/gaji}" class="btn btn-light">
+                    <span aria-hidden="true"></span>Batal
+                </a>
+            </div>
+        </div>
+    </form>
+</div>
+<div layout:fragment="customJavascript">
+</div>
+</body>
+</html>
