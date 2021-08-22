@@ -2,10 +2,7 @@ package com.artivisi.payroll.service;
 
 import com.artivisi.payroll.dao.*;
 import com.artivisi.payroll.dto.DetailPresensiDto;
-import com.artivisi.payroll.entity.CutiKaryawan;
-import com.artivisi.payroll.entity.Karyawan;
-import com.artivisi.payroll.entity.Presensi;
-import com.artivisi.payroll.entity.SlipGaji;
+import com.artivisi.payroll.entity.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +26,7 @@ public class SlipGajiService {
     @Autowired private PresensiDao presensiDao;
     @Autowired private HariLiburDao hariLiburDao;
     @Autowired private CutiKaryawanDao cutiKaryawanDao;
+//    @Autowired private RekapGajiBulananDao rekapGajiBulananDao;
 
     public List<SlipGaji> getSlipGaji(int month, int year){
         List<SlipGaji> result = slipGajiDao.findByBulanAndTahun(month, year);
@@ -40,6 +38,10 @@ public class SlipGajiService {
     public void generateSlipGajis(int month, int year) throws Exception {
         try {
 
+//            RekapGajiBulanan rekapGajiBulanan = new RekapGajiBulanan();
+//            rekapGajiBulanan.setBulan(month);
+//            rekapGajiBulanan.setTahun(year);
+
             List<LocalDate> workingDays = getWorkingDays(month,year);
 
             System.out.println(" ======== workingDays = "+workingDays.size()+" ==================");
@@ -47,8 +49,12 @@ public class SlipGajiService {
                 System.out.println("================ karyawan : "+k.getFullname()+" ==================");
 
                 SlipGaji slipGaji = new SlipGaji();
+
+                slipGaji.setBulan(month);
+                slipGaji.setTahun(year);
                 BigDecimal dendaTelat = BigDecimal.ZERO;
                 BigDecimal dendaBolos = BigDecimal.ZERO;
+                BigDecimal dendaIzin = BigDecimal.ZERO;
                 for (LocalDate workingDay:workingDays) {
                     CutiKaryawan cutiKaryawan = cutiKaryawanDao.findByTanggalCutiAndKaryawanId(workingDay, k.getId());
                     if(cutiKaryawan != null) break;
@@ -64,6 +70,11 @@ public class SlipGajiService {
                                 System.out.println(" ================== denda telat: "+presensi.getDenda()+" ==================");
                                 dendaTelat = dendaTelat.add(presensi.getDenda());
                             }
+                        }else{
+                            if(Presensi.IzinType.PERSONAL.equals(presensi.getIzinType())){
+                                System.out.println(" ================== denda izin : "+presensi.getIzinType()+" ==================");
+                                dendaIzin = dendaIzin.add(new BigDecimal("25000"));
+                            }
                         }
                     }else{
                         System.out.println(" ================== tidak hadir / bolos ==================");
@@ -75,17 +86,24 @@ public class SlipGajiService {
 
                 System.out.println(" =========== dendaTelat = "+dendaTelat.toPlainString()+" ==================");
                 System.out.println(" =========== dendaAbsent = "+dendaBolos.toPlainString()+" ==================");
+                BigDecimal totalDenda = dendaBolos.add(dendaTelat).add(dendaIzin);
+                BigDecimal totalGaji = k.getGajiKaryawan().getTotalGaji().subtract(totalDenda);
 
                 slipGaji.setKaryawan(k);
-                slipGaji.setBulan(month);
-                slipGaji.setTahun(year);
                 slipGaji.setDendaTelat(dendaTelat);
+                slipGaji.setDendaIzin(dendaTelat);
                 slipGaji.setDendaAbsent(dendaBolos);
-                slipGaji.setTotalDenda(dendaBolos.add(dendaTelat));
-                slipGaji.setTotalGaji(k.getGajiKaryawan().getTotalGaji().subtract(slipGaji.getTotalDenda()));
+                slipGaji.setTotalDenda(totalDenda);
+                slipGaji.setTotalGaji(totalGaji);
                 slipGajiDao.save(slipGaji);
-            }
 
+//                rekapGajiBulanan.getSlipGajis().add(slipGaji);
+//                rekapGajiBulanan.setTotalDendaTelat(rekapGajiBulanan.getTotalDendaTelat().add(dendaTelat));
+//                rekapGajiBulanan.setTotalDendaAbsent(rekapGajiBulanan.getTotalDendaTelat().add(dendaBolos));
+//                rekapGajiBulanan.setTotalDenda(rekapGajiBulanan.getTotalDenda().add(totalDenda));
+//                rekapGajiBulanan.setTotalPenggajian(rekapGajiBulanan.getTotalPenggajian().add(totalGaji));
+            }
+//            rekapGajiBulananDao.save(rekapGajiBulanan);
         }catch (Exception e){
             e.printStackTrace();
             log.error("ERROR GENERATING SLIP GAJI , ",e);

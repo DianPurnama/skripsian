@@ -66,6 +66,7 @@ function fetchEvents(startDate, endDate, idKaryawan) {
             let event = {
                 id:data[i].id,
                 izin:data[i].izin,
+                izinType:data[i].izinType,
                 waktuAbsen:data[i].waktuAbsen,
                 karyawan:data[i].karyawan,
                 title :  data[i].waktuAbsen+ ' - '+data[i].karyawan.fullname,
@@ -89,7 +90,7 @@ $("#filterKaryawan").on("change",function () {
     fetchEvents(start,end,idKaryawan);
 });
 
-function showModal(id,karyawan,title,start,waktuAbsen,izin) {
+function showModal(id,karyawan,title,start,waktuAbsen,izin,izinType) {
 
     let startDate =$.fullCalendar.moment(start).format();
 
@@ -101,10 +102,20 @@ function showModal(id,karyawan,title,start,waktuAbsen,izin) {
         $("#izin").prop("checked",izin);
         $("#presensiKaryawan").val(karyawan.id);
     }
+    if(izin){
+        $("#izinType").val(izinType);
+        $("#izinGroup").show();
+    }else{
+        $("#izinGroup").hide();
+    }
     $('#timepicker').timepicker('setTime', waktuAbsen);
 
     $("#dateRange").text(startDate);
 }
+
+$("#izin").on("change",function () {
+   $("#izinGroup").toggle($(this).prop("checked"));
+});
 
 var handleCalendar = function() {
     $('#calendar').fullCalendar({
@@ -125,12 +136,12 @@ var handleCalendar = function() {
             return end.isSame(start);
         },
         select: function(start) {
-            showModal('','', '',start, '08:00:00',false);
+            showModal('','', '',start, '08:00:00',false,null);
             $('#calendar').fullCalendar('unselect');
         },
         eventClick: function(event, jsEvent, view) {
             if(!event.editable) return false;
-            showModal(event.id,event.karyawan, event.title,event.start, event.waktuAbsen,event.izin);
+            showModal(event.id,event.karyawan, event.title,event.start, event.waktuAbsen,event.izin,event.izinType);
         },
         viewRender: function(view, element) {
             let idKaryawan = $("#filterKaryawan").val();

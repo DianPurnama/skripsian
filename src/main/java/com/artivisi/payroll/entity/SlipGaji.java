@@ -33,6 +33,7 @@ public class SlipGaji extends BaseEntity{
     // max denda perhari adalah Rp. 50,000 (telat 100 menit)
     // jika pegawai absent pada hari tersebut maka akan didenda 1 hari kerja (gaji/20)
     @NotNull private BigDecimal dendaTelat = BigDecimal.ZERO;
+    @NotNull private BigDecimal dendaIzin = BigDecimal.ZERO;
     @NotNull private BigDecimal dendaAbsent = BigDecimal.ZERO;
 
     @NotNull private BigDecimal totalDenda = BigDecimal.ZERO;

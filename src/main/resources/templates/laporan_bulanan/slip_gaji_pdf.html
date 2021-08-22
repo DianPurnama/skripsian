@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title th:text="${'slip-gaji-'+slipGaji.karyawan.fullname+'-'+slipGaji.getPeriode()}"></title>
+  <div th:include="fragments/head :: head" th:remove="tag">Head</div>
+  <style>
+    .table{
+      margin-bottom: 0;
+    }
+    th{
+      background-color: bisque;
+    }
+  </style>
+  <style type="text/css" media="print">
+    @page {
+      margin: 0;  /* this affects the margin in the printer settings */
+    }
+    th{
+      background-color: bisque;
+    }
+  </style>
+</head>
+<body>
+<!-- begin #page-loader -->
+<div id="page-loader" class="fade show"><span class="spinner"></span></div>
+<!-- end #page-loader -->
+
+<!-- begin #page-container -->
+<div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-6">
+              <h4>Salary Slip</h4>
+              <h4>PT. Artivisi Intermedia</h4>
+              <h5>Jl. Taman Malaka Selatan 2D Blok B9 No. 6 </h5>
+            </div>
+            <div class="col-md-6 text-right">
+              <img th:src="@{/assets/img/artivisi-logo.png}" style="width: 100px; padding-bottom: 15px;" />
+            </div>
+            <hr class="col-md-12">
+            <div class="col-md-12"  th:object="${slipGaji}">
+              <table class="table">
+                <tr>
+                  <th style="width: 50%;">
+                    Nama : <span th:text="*{karyawan.fullname}"></span>
+                  </th>
+                  <th style="width: 50%;">
+                    Periode : <span th:text="*{getPeriode()}"></span>
+                  </th>
+                </tr>
+                <tr>
+                  <td colspan="2">&nbsp;</td>
+                </tr>
+                <tr>
+                  <th>Pendapatan</th>
+                  <th>Potongan</th>
+                </tr>
+                <tr>
+                  <td>
+                    <table class="table table-borderless">
+                      <tr>
+                        <td>Gaji Pokok</td>
+                        <td class="text-right" th:text="'Rp. '+${#numbers.formatDecimal(slipGaji.karyawan.gajiPokok, 0, 'COMMA', 0, 'POINT')}"></td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">Tunjangan</td>
+                      </tr>
+                      <tr>
+                        <td>Uang Makan</td>
+                        <td class="text-right" th:text="'Rp. '+${#numbers.formatDecimal(slipGaji.karyawan.uangMakan, 0, 'COMMA', 0, 'POINT')}"></td>
+                      </tr>
+                      <tr>
+                        <td>Uang Transport</td>
+                        <td class="text-right" th:text="'Rp. '+${#numbers.formatDecimal(slipGaji.karyawan.uangTransport, 0, 'COMMA', 0, 'POINT')}"></td>
+                      </tr>
+                    </table>
+                  </td>
+                  <td>
+                    <table class="table table-borderless">
+                      <tr>
+                        <td>Potongan Telat</td>
+                        <td class="text-right" th:text="'Rp. '+${#numbers.formatDecimal(slipGaji.dendaTelat, 0, 'COMMA', 0, 'POINT')}"></td>
+                      </tr>
+                      <tr>
+                        <td>Potongan Absent</td>
+                        <td class="text-right" th:text="'Rp. '+${#numbers.formatDecimal(slipGaji.dendaAbsent, 0, 'COMMA', 0, 'POINT')}"></td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <table class="table table-borderless">
+                      <tr>
+                        <td>Total Pendapatan</td>
+                        <td class="text-right" th:text="'Rp. '+${#numbers.formatDecimal(slipGaji.karyawan.getTotalGaji(), 0, 'COMMA', 0, 'POINT')}"></td>
+                      </tr>
+                    </table>
+                  </td>
+                  <td>
+                    <table class="table table-borderless">
+                      <tr>
+                        <td>Total Potongan</td>
+                        <td class="text-right" th:text="'Rp. '+${#numbers.formatDecimal(slipGaji.getTotalDenda(), 0, 'COMMA', 0, 'POINT')}"></td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <table class="table table-borderless">
+                      <tr>
+                        <th>Pendapatan Bersih</th>
+                        <th class="text-right" th:text="'Rp. '+${#numbers.formatDecimal(slipGaji.getTotalGaji(), 0, 'COMMA', 0, 'POINT')}"></th>
+                      </tr>
+                    </table>
+                  </td>
+                  <td>&nbsp;</td>
+                </tr>
+              </table>
+            </div>
+            <div class="col-md-12 text-center p-t-40 p-b-40">
+              Jakarta, <span th:text="${#dates.createNow().toLocaleString()}"></span>
+            </div>
+            <div class="col-md-6 text-center">
+              <p>Mengetahui,</p>
+              <p class="p-t-40 font-weight-bold">Endy Muhardin</p>
+              <p class="font-italic">Direltur Utama</p>
+            </div>
+            <div class="col-md-6 text-center">
+              <p>Penerima,</p>
+              <p class="p-t-40 font-weight-bold" th:text="${slipGaji.karyawan.fullname}"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div th:include="fragments/javascript :: javascript" th:remove="tag">Javascript</div>
+<script>
+  $(document).ready(function () {
+    window.print();
+    window.onafterprint = function(){
+      window.close();
+    }
+  });
+</script>
+</body>
+</html>

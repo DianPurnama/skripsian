@@ -1,5 +1,6 @@
 package com.artivisi.payroll.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -23,6 +24,7 @@ public class Karyawan extends BaseEntity {
 
     private String address;
 
+    @JsonManagedReference
     @OneToOne(mappedBy = "karyawan", orphanRemoval = true, cascade = CascadeType.ALL)
     private GajiKaryawan gajiKaryawan;
 }

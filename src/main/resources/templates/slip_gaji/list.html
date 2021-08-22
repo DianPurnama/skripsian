@@ -63,7 +63,7 @@
                             <tbody>
                             <tr th:each="data, i : ${datas}">
                                 <td th:text="${data.karyawan.fullname}"></td>
-                                <td th:text="'Rp. '+${#numbers.formatDecimal(data.karyawan.getTotalGaji(), 0, 'COMMA', 0, 'POINT')}"></td>
+                                <td th:text="'Rp. '+${#numbers.formatDecimal(data.karyawan.gajiKaryawan.getTotalGaji(), 0, 'COMMA', 0, 'POINT')}"></td>
                                 <td th:text="'Rp. '+${#numbers.formatDecimal(data.dendaTelat, 0, 'COMMA', 0, 'POINT')}"></td>
                                 <td th:text="'Rp. '+${#numbers.formatDecimal(data.dendaAbsent, 0, 'COMMA', 0, 'POINT')}"></td>
                                 <td th:text="'Rp. '+${#numbers.formatDecimal(data.getTotalDenda(), 0, 'COMMA', 0, 'POINT')}"></td>

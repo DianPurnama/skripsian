@@ -25,7 +25,13 @@ public class DetailPresensiDto {
 
 
         if(this.presensi != null){
-            if(this.presensi.isIzin()) return "Izin";
+            if(this.presensi.isIzin()){
+                if(Presensi.IzinType.PERSONAL.equals(this.presensi.getIzinType())){
+                    return "Izin Personal";
+                }else{
+                    return "Izin Pekerjaan";
+                }
+            }
             if(presensi.isTelat()) return "Telat "+this.presensi.getTelatMenit()+" menit";
         }else{
             return "Tidak masuk kerja";
@@ -36,12 +42,24 @@ public class DetailPresensiDto {
     public BigDecimal getDenda(){
         if(cutiKaryawan != null) return BigDecimal.ZERO;
 
+        BigDecimal denda = BigDecimal.ZERO;
+
         if(this.presensi != null){
-            if(this.presensi.isTelat() && !this.presensi.isIzin()) return this.presensi.getDenda();
+            if(this.presensi.isTelat()){
+                denda = denda.add(this.presensi.getDenda());
+            }
+
+            if(this.presensi.isIzin()){
+                if(Presensi.IzinType.WORK.equals(this.presensi.getIzinType())){
+                    denda = BigDecimal.ZERO;
+                }else{
+                    denda = denda.add(new BigDecimal("25000"));
+                }
+            }
         }else{
             return this.karyawan.getGajiKaryawan().getGajiSatuHariKerja();
         }
-        return BigDecimal.ZERO;
+        return denda;
     }
 
 }

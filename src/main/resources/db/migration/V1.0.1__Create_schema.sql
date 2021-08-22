@@ -36,9 +36,9 @@ create table karyawan (
 create table presensi (
     id varchar(255) not null,
     izin bit not null,
-    izin_type integer,
     tanggal date not null,
     waktu_absen time not null,
+    izin_type varchar(255),
     id_karyawan varchar(255) not null,
     primary key (id)
 ) engine=InnoDB;
@@ -48,6 +48,7 @@ create table slip_gaji (
     bulan integer not null,
     created_time datetime(6) not null,
     denda_absent decimal(19,2) not null,
+    denda_izin decimal(19,2) not null,
     denda_telat decimal(19,2) not null,
     tahun integer not null,
     total_denda decimal(19,2) not null,

@@ -1,6 +1,9 @@
 package com.artivisi.payroll.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -11,9 +14,10 @@ import java.math.BigDecimal;
 
 @Table
 @Entity
-@Data
+@Getter @Setter
 public class GajiKaryawan extends BaseEntity{
 
+    @JsonBackReference
     @OneToOne
     @JoinColumn(name = "id_karyawan", nullable = false)
     private Karyawan karyawan;

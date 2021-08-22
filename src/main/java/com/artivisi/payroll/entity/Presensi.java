@@ -35,13 +35,15 @@ public class Presensi extends BaseEntity {
 
     @NotNull
     private boolean izin = false;
-    private izinType izinType;
+
+    @Enumerated(EnumType.STRING)
+    private IzinType izinType;
 
     @Transient private boolean telat;
     @Transient private long telatMenit = 0;
     @Transient private BigDecimal denda;
 
-    public enum izinType{
+    public enum IzinType {
         PERSONAL,WORK
     }
 

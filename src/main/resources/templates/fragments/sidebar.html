@@ -36,6 +36,11 @@
                                 <i class="fa fa-users"></i> Karyawan
                             </a>
                         </li>
+                        <li th:classappend="${level1 == 'GAJI' ? 'active' : ''}">
+                            <a th:href="@{/master/gaji}">
+                                <i class="fa fa-dollar-sign"></i> Gaji Karyawan
+                            </a>
+                        </li>
                         <li th:classappend="${activeTab == 'HARI_LIBUR' ? 'active' : ''}">
                             <a th:href="@{/hari_libur}">
                                 <i class="fa fa-calendar-times"></i>

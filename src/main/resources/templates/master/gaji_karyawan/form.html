@@ -15,7 +15,8 @@
     <h1 class="page-header">Karyawan Form</h1>
     <!-- end page-header -->
 
-    <form th:action="@{/master/gaji/form}" th:object="${gaji}" method="POST">
+    <form th:action="@{/master/gaji/form}" th:object="${gajiKaryawan}" method="POST">
+        <input type="hidden" th:field="*{id}">
         <div class="row">
             <div class="col-md-8">
                 <div class="panel panel-inverse" data-sortable-id="table-basic-1">
@@ -24,9 +25,9 @@
                             <div class="form-group">
                                 <label class=" control-label form-label">Karyawan</label>
                                 <select th:field="*{karyawan}" class="form-control" required>
-                                    <option th:each="k : ${karayawans}" th:value="${k.id}" th:text="${k.fullname}"></option>
+                                    <option th:each="k : ${karyawans}" th:value="${k.id}" th:text="${k.fullname}"></option>
                                 </select>
-                                <div class="form-text text-danger" th:if="${#fields.hasErrors('gajiPokok')}" th:errors="*{gajiPokok}"></div>
+                                <div class="form-text text-danger" th:if="${#fields.hasErrors('karyawan')}" th:errors="*{karyawan}"></div>
                             </div>
                             <hr>
                             <div class="form-group">
