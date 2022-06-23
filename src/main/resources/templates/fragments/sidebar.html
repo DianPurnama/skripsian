@@ -13,7 +13,7 @@
                         <li th:classappend="${activeTab == 'HOME' ? 'active' : ''}">
                             <a th:href="@{/}">
                                 <i class="fa fa-home"></i>
-                                <span>Home</span>
+                                <span>Beranda</span>
                             </a>
                         </li>
 <!--                        <li class="has-sub" th:classappend="${activeTab == 'MASTER' ? 'active' : ''}">-->
@@ -41,12 +41,12 @@
                                 <i class="fa fa-dollar-sign"></i> Gaji Karyawan
                             </a>
                         </li>
-                        <li th:classappend="${activeTab == 'HARI_LIBUR' ? 'active' : ''}">
-                            <a th:href="@{/hari_libur}">
-                                <i class="fa fa-calendar-times"></i>
-                                <span>Hari Libur</span>
-                            </a>
-                        </li>
+<!--                        <li th:classappend="${activeTab == 'HARI_LIBUR' ? 'active' : ''}">-->
+<!--                            <a th:href="@{/hari_libur}">-->
+<!--                                <i class="fa fa-calendar-times"></i>-->
+<!--                                <span>Hari Libur</span>-->
+<!--                            </a>-->
+<!--                        </li>-->
                         <li th:classappend="${activeTab == 'CUTI' ? 'active' : ''}">
                             <a th:href="@{/cuti_karyawan}">
                                 <i class="fa fa-exclamation-triangle"></i>

@@ -43,8 +43,17 @@ public class KaryawanService {
         try {
             karyawanDao.save(karyawan);
         }catch (Exception e){
-            log.error("=========== ERROR SAVING KARYAWAN ============", e);
+            log.error("=========== ERROR Menyimpan Karyawan ============", e);
             throw new Exception("Something went wrong, please contact admin",e);
+        }
+    }
+
+    public void deleteKaryawan(String id) throws Exception {
+        try {
+            karyawanDao.deleteById(id);
+        } catch (Exception e) {
+            log.error("==============ERROR Hapus Karyawan==============", e);
+            throw new Exception("Gagal Menghapus : "+ e.getMessage(), e);
         }
     }
 }

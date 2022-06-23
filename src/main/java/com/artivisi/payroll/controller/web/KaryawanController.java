@@ -58,4 +58,15 @@ public class KaryawanController {
         }
     }
 
+    @GetMapping("/delete")
+    public String delete(@RequestParam String id, RedirectAttributes redirectAttributes, ModelMap mm) {
+        try {
+            karyawanService.deleteKaryawan(id);
+            redirectAttributes.addFlashAttribute("successMessage", "Data telah dihapus" );
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage",e.getMessage());
+        }
+        return "redirect:/master/karyawan";
+    }
+
 }

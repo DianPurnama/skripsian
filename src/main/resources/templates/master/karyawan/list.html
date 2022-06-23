@@ -5,7 +5,7 @@
 <body>
 <div layout:fragment="content">
     <ol class="breadcrumb pull-right">
-        <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+        <li class="breadcrumb-item"><a href="javascript:;">Beranda</a></li>
         <li class="breadcrumb-item"><a href="javascript:;">Master</a></li>
         <li class="breadcrumb-item active"><a href="javascript:;">Karyawan</a></li>
     </ol>
@@ -13,7 +13,7 @@
     <hr class="bg-grey-lighter" />
     <div class="row">
         <div class="col-md-12 p-b-10">
-            <a th:href="@{/master/karyawan/form}" class="btn btn-primary">Tambah Karyawan</a>
+            <a th:href="@{/master/karyawan/form}" class="btn btn-purple">Tambah Karyawan</a>
         </div>
         <div class="col-md-12">
             <div class="panel panel-inverse" data-sortable-id="table-basic-1">
@@ -22,7 +22,7 @@
                         <div class="input-group input-group-sm m-b-20">
                             <input type="text" class="form-control" th:value="${name}" placeholder="Cari ...">
                             <div class="input-group-append">
-                                <button type="submit" class="btn btn-primary"><i class="fa fa-search fa-fw"></i> Search</button>
+                                <button type="submit" class="btn btn-purple"><i class="fa fa-search fa-fw"></i> Cari</button>
                             </div>
                         </div>
                     </form>
@@ -30,11 +30,11 @@
                     <div class="table-responsive">
                         <table class="table table-bordered">
                             <tr>
-                                <th>Full Name</th>
+                                <th>Nama Lengkap</th>
                                 <th>Finger Print ID</th>
                                 <th>Email</th>
-                                <th>Phone</th>
-                                <th>Address</th>
+                                <th>No Hp</th>
+                                <th>Alamat</th>
                                 <th class="text-center">Action</th>
                             </tr>
                             </thead>
@@ -46,7 +46,10 @@
                                 <td th:text="${data.phone}"></td>
                                 <td th:text="${data.address}"></td>
                                 <td class="text-center">
-                                    <a th:href="@{/master/karyawan/form(id = ${data.id})}" class="btn btn-label-warning btn-sm" title="Edit"><span class="fa fa-edit"></span></a>
+                                    <a th:href="@{/master/karyawan/form(id = ${data.id})}" class="btn btn-label-warning btn-sm"
+                                       title="Ubah"><span class="fa fa-edit"></span></a>
+                                    <a th:href="@{/master/karyawan/delete(id = ${data.id})}" class="btn btn-danger btn-sm btn-icon sw"
+                                       title="Hapus" onclick="return confirm('Apakah benar Anda ingin menghapus karyawan?')"><span class="fa fa-trash"></span></a>
                                 </td>
                             </tr>
                             <tr th:if="${#lists.isEmpty(datas.content)}">

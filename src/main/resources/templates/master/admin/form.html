@@ -6,13 +6,13 @@
 <div layout:fragment="content">
     <!-- begin breadcrumb -->
     <ol class="breadcrumb pull-right">
-        <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+        <li class="breadcrumb-item"><a href="javascript:;">Beranda</a></li>
         <li class="breadcrumb-item"><a href="javascript:;">Master</a></li>
         <li class="breadcrumb-item active"><a href="javascript:;">Admin</a></li>
     </ol>
     <!-- end breadcrumb -->
     <!-- begin page-header -->
-    <h1 class="page-header">Admin Form</h1>
+    <h1 class="page-header">Form Admin</h1>
     <!-- end page-header -->
     <hr class="bg-grey-lighter" />
     <form th:action="@{/master/admin/form}" method="POST">
@@ -53,7 +53,7 @@
 <!--                                <div class="form-text text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>-->
                             </div>
                             <div class="form-group">
-                                <label class=" control-label form-label">Confirm Password</label>
+                                <label class=" control-label form-label">Konfirmasi Password</label>
                                 <input class="form-control" type="password" name="confirmPassword" id="confirmPassword"/>
                                 <span class="help-block" id="errorConfirmPassword" style="display: none"><span class="text-danger">Password doesn't match !</span></span>
                             </div>

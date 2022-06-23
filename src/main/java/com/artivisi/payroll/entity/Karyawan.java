@@ -11,6 +11,9 @@ import javax.validation.constraints.NotEmpty;
 @Table
 public class Karyawan extends BaseEntity {
 
+    @Id
+    private String id;
+
     @NotEmpty private String fullname;
 
     @Column(unique = true)

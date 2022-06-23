@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Payroll App | Login</title>
+    <title>Sistem Penggajian | Login</title>
     <div th:include="fragments/head :: head" th:remove="tag">Head</div>
 </head>
 <body class="pace-top bg-white">
@@ -15,7 +15,7 @@
     <div class="login login-with-news-feed">
         <!-- begin news-feed -->
         <div class="news-feed">
-            <div class="news-image" th:style="'background-size:100%;background-color:#1A3D63;background-image:url('+@{/assets/img/login_bg.jpg}+')'"></div>
+            <div class="news-image" th:style="'background-size:100%;background-color:#1A3D63;background-image:url('+@{/assets/img/salary.png}+')'"></div>
         </div>
         <!-- end news-feed -->
         <!-- begin right-content -->
@@ -23,7 +23,7 @@
             <!-- begin login-content -->
             <div class="login-content" style="padding: 0px 60px;">
                 <div class="brand">
-                    <img th:src="@{/assets/img/payroll_logo.jpg}" style="max-width: 100%;padding-bottom: 10px;"/>
+                    <img th:src="@{/assets/img/Payroll-Hero.svg}" style="max-width: 100%;padding-bottom: 10px;"/>
                 </div>
                 <div th:if="${successMessage}" class="alert alert-success fade show">
                     <span class="close" data-dismiss="alert">×</span>
@@ -48,12 +48,12 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12 m-b-15">
-                            <button type="submit" class="btn btn-success btn-block btn-md">Login</button>
+                            <button type="submit" class="btn btn-purple btn-block btn-md">Login</button>
                         </div>
                     </div>
                     <hr />
                     <p class="text-center">
-                        Copyright © 2021 Payroll for PT. Artivisi <br>
+                        Copyright © 2022 Sistem Penggajian PT Norco Sejahtera Indonesia <br>
                         All Rights Reserved<br>
                     </p>
                 </form>
