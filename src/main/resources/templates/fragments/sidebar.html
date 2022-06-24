@@ -31,12 +31,12 @@
 <!--                                </li>-->
 <!--                            </ul>-->
 <!--                        </li>-->
-                        <li th:classappend="${level1 == 'KARYAWAN' ? 'active' : ''}">
+                        <li sec:authorize="hasAuthority('ADMIN')" th:classappend="${level1 == 'KARYAWAN' ? 'active' : ''}">
                             <a th:href="@{/master/karyawan}">
                                 <i class="fa fa-users"></i> Karyawan
                             </a>
                         </li>
-                        <li th:classappend="${level1 == 'GAJI' ? 'active' : ''}">
+                        <li sec:authorize="hasAuthority('ADMIN')" th:classappend="${level1 == 'GAJI' ? 'active' : ''}">
                             <a th:href="@{/master/gaji}">
                                 <i class="fa fa-dollar-sign"></i> Gaji Karyawan
                             </a>
@@ -47,22 +47,34 @@
 <!--                                <span>Hari Libur</span>-->
 <!--                            </a>-->
 <!--                        </li>-->
-                        <li th:classappend="${activeTab == 'CUTI' ? 'active' : ''}">
+                        <li sec:authorize="hasAuthority('ADMIN')" th:classappend="${activeTab == 'CUTI' ? 'active' : ''}">
                             <a th:href="@{/cuti_karyawan}">
                                 <i class="fa fa-exclamation-triangle"></i>
                                 <span>Cuti Karyawan</span>
                             </a>
                         </li>
-                        <li th:classappend="${activeTab == 'PRESENSI' ? 'active' : ''}">
+                        <li sec:authorize="hasAuthority('ADMIN')" th:classappend="${activeTab == 'PRESENSI' ? 'active' : ''}">
                             <a th:href="@{/presensi_karyawan}">
                                 <i class="fa fa-calendar-check"></i>
                                 <span>Presensi Karyawan</span>
                             </a>
                         </li>
-                        <li th:classappend="${activeTab == 'SLIP_GAJI' ? 'active' : ''}">
+                        <li sec:authorize="hasAuthority('ADMIN')" th:classappend="${activeTab == 'SLIP_GAJI' ? 'active' : ''}">
                             <a th:href="@{/slip_gaji}">
                                 <i class="fa fa-money-check"></i>
                                 <span>Slip Gaji</span>
+                            </a>
+                        </li>
+                        <li sec:authorize="hasAuthority('KRY')" th:classappend="${activeTab == 'CUTI' ? 'active' : ''}">
+                            <a th:href="@{/cuti_karyawan/form}">
+                                <i class="fa fa-exclamation-triangle"></i>
+                                <span>Pengajuan Cuti</span>
+                            </a>
+                        </li>
+                        <li sec:authorize="hasAuthority('KRY')" th:classappend="${activeTab == 'SLIP_GAJI' ? 'active' : ''}">
+                            <a th:href="@{/slip_gaji}">
+                                <i class="fa fa-money-check"></i>
+                                <span>Cetak Slip Gaji</span>
                             </a>
                         </li>
                     </ul>

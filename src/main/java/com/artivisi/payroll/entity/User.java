@@ -40,6 +40,6 @@ public class User extends BaseEntity {
     private Role role = Role.ADMIN;
 
     public enum Role{
-        ADMIN
+        ADMIN, KRY
     }
 }

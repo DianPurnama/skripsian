@@ -45,11 +45,11 @@ public class SlipGaji extends BaseEntity{
         return Month.of(bulan).name() + "-"+tahun;
     }
 
-//    public BigDecimal getTotalDenda() {
-//        return this.dendaAbsent.add(this.dendaTelat);
-//    }
-//
-//    public BigDecimal getTotalGaji() {
-//        return this.karyawan.getTotalGaji().subtract(getTotalDenda());
-//    }
+    public BigDecimal getTotalDenda() {
+        return this.dendaAbsent.add(this.dendaTelat);
+    }
+
+    public BigDecimal getTotalGaji() {
+        return this.karyawan.getGajiKaryawan().getTotalGaji().subtract(getTotalDenda());
+    }
 }

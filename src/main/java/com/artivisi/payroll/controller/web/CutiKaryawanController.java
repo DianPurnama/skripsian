@@ -4,6 +4,7 @@ import com.artivisi.payroll.entity.CutiKaryawan;
 import com.artivisi.payroll.service.CutiService;
 import com.artivisi.payroll.service.KaryawanService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,13 @@ public class CutiKaryawanController {
     public String showList(ModelMap modelMap){
         modelMap.addAttribute("karyawans", karyawanService.getKaryawan());
         return "cuti_karyawan/list";
+    }
+
+    @GetMapping("/form")
+    public String showFormKry(ModelMap modelMap, Authentication authentication){
+        modelMap.addAttribute("karyawans", karyawanService.getKaryawan());
+        modelMap.addAttribute("karyawan", karyawanService.getKaryawanByEmail(authentication.getName()).get());
+        return "cuti_karyawan/form";
     }
 
     @PostMapping("/form")
