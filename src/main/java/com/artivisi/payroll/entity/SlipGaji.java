@@ -50,6 +50,6 @@ public class SlipGaji extends BaseEntity{
     }
 
     public BigDecimal getTotalGaji() {
-        return this.karyawan.getGajiKaryawan().getTotalGaji().subtract(getTotalDenda());
+        return this.karyawan.getJabatan().getTotalGaji().subtract(getTotalDenda());
     }
 }

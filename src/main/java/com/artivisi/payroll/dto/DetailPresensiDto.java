@@ -57,7 +57,7 @@ public class DetailPresensiDto {
                 }
             }
         }else{
-            return this.karyawan.getGajiKaryawan().getGajiSatuHariKerja();
+            return this.karyawan.getJabatan().getGajiSatuHariKerja();
         }
         return denda;
     }

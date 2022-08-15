@@ -1,5 +1,6 @@
 package com.artivisi.payroll.controller.web;
 
+import com.artivisi.payroll.dao.JabatanDao;
 import com.artivisi.payroll.entity.Karyawan;
 import com.artivisi.payroll.service.KaryawanService;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +25,7 @@ import javax.validation.Valid;
 public class KaryawanController {
 
     @Autowired private KaryawanService karyawanService;
+    @Autowired private JabatanDao jabatanDao;
 
     @GetMapping
     public String showList(@RequestParam(required = false) String name, ModelMap modelMap, @PageableDefault Pageable pageable){
@@ -35,6 +37,7 @@ public class KaryawanController {
     @GetMapping("/form")
     public String showForm(@RequestParam(required = false) String id, ModelMap modelMap){
         modelMap.addAttribute("karyawan", StringUtils.hasText(id) ? karyawanService.getKaryawan(id).get() : new Karyawan());
+        modelMap.addAttribute("jabatans", jabatanDao.findAll());
         return "master/karyawan/form";
     }
 

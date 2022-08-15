@@ -64,18 +64,18 @@
                     <table class="table table-borderless">
                       <tr>
                         <td>Gaji Pokok</td>
-                        <td class="text-right" th:text="'Rp. '+${#numbers.formatDecimal(slipGaji.karyawan.gajiKaryawan.gajiPokok, 0, 'COMMA', 0, 'POINT')}"></td>
+                        <td class="text-right" th:text="'Rp. '+${#numbers.formatDecimal(slipGaji.karyawan.jabatan.gajiPokok, 0, 'COMMA', 0, 'POINT')}"></td>
                       </tr>
                       <tr>
                         <td colspan="2">Tunjangan</td>
                       </tr>
                       <tr>
                         <td>Uang Makan</td>
-                        <td class="text-right" th:text="'Rp. '+${#numbers.formatDecimal(slipGaji.karyawan.gajiKaryawan.uangMakan, 0, 'COMMA', 0, 'POINT')}"></td>
+                        <td class="text-right" th:text="'Rp. '+${#numbers.formatDecimal(slipGaji.karyawan.jabatan.uangMakan, 0, 'COMMA', 0, 'POINT')}"></td>
                       </tr>
                       <tr>
                         <td>Uang Transport</td>
-                        <td class="text-right" th:text="'Rp. '+${#numbers.formatDecimal(slipGaji.karyawan.gajiKaryawan.uangTransport, 0, 'COMMA', 0, 'POINT')}"></td>
+                        <td class="text-right" th:text="'Rp. '+${#numbers.formatDecimal(slipGaji.karyawan.jabatan.uangTransport, 0, 'COMMA', 0, 'POINT')}"></td>
                       </tr>
                     </table>
                   </td>
@@ -97,7 +97,7 @@
                     <table class="table table-borderless">
                       <tr>
                         <td>Total Pendapatan</td>
-                        <td class="text-right" th:text="'Rp. '+${#numbers.formatDecimal(slipGaji.karyawan.gajiKaryawan.getTotalGaji(), 0, 'COMMA', 0, 'POINT')}"></td>
+                        <td class="text-right" th:text="'Rp. '+${#numbers.formatDecimal(slipGaji.karyawan.jabatan.getTotalGaji(), 0, 'COMMA', 0, 'POINT')}"></td>
                       </tr>
                     </table>
                   </td>

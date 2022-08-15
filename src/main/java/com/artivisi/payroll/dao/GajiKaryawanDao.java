@@ -8,5 +8,5 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface GajiKaryawanDao extends PagingAndSortingRepository<GajiKaryawan, String>, JpaSpecificationExecutor<GajiKaryawan> {
 
-    Page<GajiKaryawan> findByKaryawanFullnameContainingIgnoreCase(String fullname, Pageable pageable);
+//    Page<GajiKaryawan> findByKaryawanFullnameContainingIgnoreCase(String fullname, Pageable pageable);
 }

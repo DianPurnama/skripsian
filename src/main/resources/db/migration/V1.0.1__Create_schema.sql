@@ -11,7 +11,16 @@ create table gaji_karyawan (
     gaji_pokok decimal(19,2) not null,
     uang_makan decimal(19,2) not null,
     uang_transport decimal(19,2) not null,
-    id_karyawan varchar(255) not null,
+    primary key (id)
+) engine=InnoDB;
+
+create table jabatan (
+    id varchar(255) not null,
+    description varchar(255),
+    name_jabatan varchar(255),
+    gaji_pokok decimal(19,2) not null,
+    uang_makan decimal(19,2) not null,
+    uang_transport decimal(19,2) not null,
     primary key (id)
 ) engine=InnoDB;
 
@@ -30,6 +39,7 @@ create table karyawan (
     finger_print_id varchar(255),
     fullname varchar(255),
     phone varchar(255),
+    id_jabatan varchar(255) not null,
     primary key (id)
 ) engine=InnoDB;
 
@@ -87,11 +97,6 @@ alter table cuti_karyawan
     foreign key (id_karyawan)
     references karyawan (id);
 
-alter table gaji_karyawan
-    add constraint FKoeskrd1q90slw6kwvo5l3lrc8
-    foreign key (id_karyawan)
-    references karyawan (id);
-
 alter table presensi
     add constraint FK1589do495ap48iglfm6grspo7
     foreign key (id_karyawan)
@@ -101,3 +106,4 @@ alter table slip_gaji
     add constraint FKbvmelsthv8kcy038ohcmgm63w
     foreign key (id_karyawan)
     references karyawan (id);
+

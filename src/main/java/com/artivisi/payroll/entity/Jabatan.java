@@ -1,21 +1,28 @@
 package com.artivisi.payroll.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
-@Table
+@Data
 @Entity
-@Getter @Setter
-public class GajiKaryawan extends BaseEntity{
+@Table
+public class Jabatan extends BaseEntity{
+
+    @NotNull
+    private String nameJabatan;
+
+    @NotNull
+    private String description;
+
+    @JsonManagedReference
+    @OneToOne(mappedBy = "jabatan", orphanRemoval = true, cascade = CascadeType.ALL)
+    private Karyawan karyawan;
+
     @NotNull
     private BigDecimal gajiPokok;
 
@@ -34,4 +41,5 @@ public class GajiKaryawan extends BaseEntity{
     public BigDecimal getGajiSatuHariKerja(){
         return getTotalGaji().divide(new BigDecimal(20));
     }
+
 }

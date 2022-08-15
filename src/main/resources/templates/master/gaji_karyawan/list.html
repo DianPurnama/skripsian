@@ -39,16 +39,16 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="data : ${datas}">
-                                <td th:text="${data.karyawan.fullname}"></td>
-                                <td th:text="'Rp. '+${#numbers.formatDecimal(data.gajiPokok, 0, 'COMMA', 0, 'POINT')}">
-                                <td th:text="'Rp. '+${#numbers.formatDecimal(data.uangMakan, 0, 'COMMA', 0, 'POINT')}">
-                                <td th:text="'Rp. '+${#numbers.formatDecimal(data.uangTransport, 0, 'COMMA', 0, 'POINT')}">
-                                <td th:text="'Rp. '+${#numbers.formatDecimal(data.getTotalGaji(), 0, 'COMMA', 0, 'POINT')}">
-                                <td class="text-center">
-                                    <a th:href="@{/master/gaji/form(id = ${data.id})}" class="btn btn-label-warning btn-sm" title="Edit"><span class="fa fa-edit"></span></a>
-                                </td>
-                            </tr>
+<!--                            <tr th:each="data : ${datas}">-->
+<!--                                <td th:text="${data.karyawan.fullname}"></td>-->
+<!--                                <td th:text="'Rp. '+${#numbers.formatDecimal(data.gajiPokok, 0, 'COMMA', 0, 'POINT')}">-->
+<!--                                <td th:text="'Rp. '+${#numbers.formatDecimal(data.uangMakan, 0, 'COMMA', 0, 'POINT')}">-->
+<!--                                <td th:text="'Rp. '+${#numbers.formatDecimal(data.uangTransport, 0, 'COMMA', 0, 'POINT')}">-->
+<!--                                <td th:text="'Rp. '+${#numbers.formatDecimal(data.getTotalGaji(), 0, 'COMMA', 0, 'POINT')}">-->
+<!--                                <td class="text-center">-->
+<!--                                    <a th:href="@{/master/gaji/form(id = ${data.id})}" class="btn btn-label-warning btn-sm" title="Edit"><span class="fa fa-edit"></span></a>-->
+<!--                                </td>-->
+<!--                            </tr>-->
                             <tr th:if="${#lists.isEmpty(datas.content)}">
                                 <td colspan="6" class="text-center">No data</td>
                             </tr>
