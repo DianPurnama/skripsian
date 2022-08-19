@@ -3,6 +3,7 @@ package com.artivisi.payroll.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -31,5 +32,6 @@ public class Karyawan extends BaseEntity {
     @JsonBackReference
     @OneToOne
     @JoinColumn(name = "id_jabatan", nullable = false)
+    @ToString.Exclude
     private Jabatan jabatan;
 }

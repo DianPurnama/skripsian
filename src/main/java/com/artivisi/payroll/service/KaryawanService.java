@@ -51,8 +51,15 @@ public class KaryawanService {
 
     @Transactional
     public void saveKaryawan(Karyawan karyawan) throws Exception {
+        new User();
+        User user;
+        Optional<Karyawan> optionalKaryawan = karyawanDao.findById(karyawan.getId());
+        if (optionalKaryawan.isPresent()){
+            user = userDao.findByUsername(karyawan.getEmail()).get();
+        } else {
+            user = new User();
+        }
         try {
-            User user = new User();
             user.setActive(true);
             user.setFullname(karyawan.getFullname());
             user.setRole(User.Role.KRY);
